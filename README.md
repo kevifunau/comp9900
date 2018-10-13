@@ -1,16 +1,20 @@
-# comp9900
 
-
-### quick install guide
+## quick install guide
 
 #### install python 3.6
+```bash
 $ pip install python
+```
 #### install Django 2.0
+```bash
 $ pip install Django
+```
 
 
 ###  start django development server
+```bash
 $ python manage.py runserver
+```
 
 you will see follow output
 ```bash
