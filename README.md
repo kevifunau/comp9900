@@ -10,13 +10,24 @@ $ pip install python
 $ pip install Django
 ```
 
+verify
+```bash
+$ python --version
+Python 3.6
+$ python
+Python 3.6.4 |Anaconda custom (64-bit)| (default, Jan 16 2018, 12:04:33)
+[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import django
+```
+
 
 ###  start django development server
 ```bash
 $ python manage.py runserver
 ```
 
-you will see follow output
+you will see following output
 ```bash
 Performing system checks...
 
