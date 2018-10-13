@@ -1,0 +1,579 @@
+{% extends "base.html" %}
+{% block title %}
+
+
+    <title>Property_detail</title>
+
+    {#    <!-- Favicons-->#}
+    {#    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">#}
+    {#    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">#}
+    {#    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">#}
+    {#    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">#}
+    {#    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">#}
+{% endblock %}
+
+
+{% block content %}
+
+
+    <!------------ picture presentation -------------->
+
+    <div class="carousel_in">
+        {% for image in property.images_set.all %}
+            <div><img src="{{ image.image.url }}" alt="" height="450px">
+                <div class="caption"><h3>Detail Picture</h3></div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!------------ end picture presentation -------------->
+
+    <!------------ detail presentation -------------->
+    {% if property.types_property == "H" %}
+        <h1 class="main_title_in">House</h1>
+    {% elif property.types_property == "A" %}
+        <h1 class="main_title_in">Apartment</h1>
+    {% elif property.types_property == "S" %}
+        <h1 class="main_title_in">Studio</h1>
+    {% elif property.types_property == "O" %}
+        <h1 class="main_title_in">Others</h1>
+    {% endif %}
+    <div class="container add_bottom_60">
+
+        <div class="row">
+            <div class="col-md-8" id="room_detail_desc">
+                <div id="single_room_feat">
+                    <ul>
+                        <li><i class="icon_set_1_icon-7"></i>Wifi</li>
+                        <li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
+                        <li><i class="icon_set_2_icon-104"></i>King size bed</li>
+                        <li><i class="icon_set_2_icon-111"></i>Bathtub</li>
+                        <li><i class="icon_set_2_icon-106"></i>Safe box</li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <h3>Description</h3>
+                    </div>
+                    <div class="col-md-9">
+                        <p>
+                            Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu
+                            detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae
+                            adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique
+                            te
+                            qui. Ad cum movet fierent assueverit, mei stet legere ne. Mel at vide soluta, ut utamur
+                            antiopam
+                            inciderint sed. Ut iriure perpetua voluptaria has, vim postea denique in, mollis pertinax
+                            elaboraret sed in. Per no vidit timeam, quis omittam sed at.
+                        </p>
+                        <h4>Room facilities</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu
+                            detraxit constituam, an mel iudico constituto efficiendi.
+                        </p>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <ul class="list_ok">
+                                    <li>Coffee machine</li>
+                                    <li>Wifi</li>
+                                    <li> Microwave</li>
+                                    <li>Oven</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <ul class="list_ok">
+                                    <li>Fridge</li>
+                                    <li>Hairdryer</li>
+                                    <li>Towels</li>
+                                    <li>Toiletries</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <ul class="list_ok">
+                                    <li>DVD player</li>
+                                    <li>Air-conditioning</li>
+                                    <li>Tv</li>
+                                    <li>Freezer</li>
+                                </ul>
+                            </div>
+                        </div><!-- End row  -->
+                        <h4>Room Prices</h4>
+                        <!-- start pricing table -->
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <td>Low (from 23/03 to 31/05)</td>
+                                <td>140$</td>
+                            </tr>
+                            <tr>
+                                <td>Middle (from 23/03 to 31/05)</td>
+                                <td>180$</td>
+                            </tr>
+                            <tr>
+                                <td>High (from 23/03 to 31/05)</td>
+                                <td>200$</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- End col-md-9  -->
+                </div><!-- End row  -->
+
+                <hr>
+
+
+                <div class="row">
+
+                    {######################                     写 评论#}
+                    <div class="col-md-3">
+                        <h3>Reviews</h3>
+                        <a href="#" class="btn_1 add_bottom_15" data-toggle="modal" data-target="#myReview">Leave a
+                            review</a>
+                    </div>
+                    {#########################                评论概况#}
+
+                    <div class="col-md-9">
+                        <div id="score_detail"><span>{{ review_summary.average_rating }}</span>Good
+                            <small>(Based on {{ review_summary.num_review }} reviews)</small>
+                        </div><!-- End general_rating -->
+                        <div class="row" id="rating_summary">
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>Position
+                                        <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i
+                                                class="icon-star"></i><i
+                                                class="icon-star-empty"></i><i class="icon-star-empty"></i>
+                                        </div>
+                                    </li>
+                                    <li>Comfort
+                                        <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i
+                                                class="icon-star"></i><i
+                                                class="icon-star"></i><i class="icon-star-empty"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>Price
+                                        <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i
+                                                class="icon-star"></i><i
+                                                class="icon-star-empty"></i><i class="icon-star-empty"></i>
+                                        </div>
+                                    </li>
+                                    <li>Quality
+                                        <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i
+                                                class="icon-star"></i><i
+                                                class="icon-star"></i><i class="icon-star-empty"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div><!-- End row -->
+
+                        <hr>
+
+
+                        {###################                    评论   Property/vires.property_detail #}
+                        {% for review_list in review_lists %}
+                            <div class="review_strip_single">
+                                <img src="img/avatar1.jpg" alt="" class="img-circle">
+                                <small> {{ review_list.time }} -</small>
+                                <h4>{{ review_list.name }}</h4>
+                                <p>
+                                    {{ review_list.review }}
+                                </p>
+                                <div class="rating">
+                                    {% for i in review_list.ratings_p %}
+                                        <i class="icon-star"></i>
+                                    {% endfor %}
+                                    {% for i in review_list.ratings_n %}
+                                        <i class="icon-star-empty"></i>
+                                    {% endfor %}
+                                </div>
+                            </div><!-- End review strip -->
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h3>Policies</h3>
+                    </div>
+                    <div class="col-md-9">
+                        <ul id="policies">
+                            <li><i class="icon_set_1_icon-83"></i><h5>Check-in and check-out.</h5>
+                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
+                                    omnes
+                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
+                                    assueverit vix, falli aliquam complectitur ex ius.</p>
+                            </li>
+                            <li><i class="icon_set_1_icon-54"></i><h5>Cancellation</h5>
+                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
+                                    omnes
+                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
+                                    assueverit vix, falli aliquam complectitur ex ius.</p>
+                            </li>
+                            <li><i class="icon_set_1_icon-47"></i><h5>Smoking</h5>
+                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
+                                    omnes
+                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
+                                    assueverit vix, falli aliquam complectitur ex ius.</p>
+                            </li>
+                            <li><i class="icon_set_1_icon-35"></i><h5>Payments</h5>
+                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
+                                    omnes
+                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
+                                    assueverit vix, falli aliquam complectitur ex ius.</p>
+                            </li>
+                            <li><i class="icon_set_1_icon-13"></i><h5>Disable</h5>
+                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
+                                    omnes
+                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
+                                    assueverit vix, falli aliquam complectitur ex ius.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- End col -->
+
+
+            <!----------------- booking -------------->
+
+            <div class="col-md-4" id="sidebar">
+                <div class="theiaStickySidebar">
+                    <div class="box_style_1">
+                        <div id="message-booking"></div>
+                        {% if user.is_authenticated %}
+                            <form method="post" action="{% url 'PendingAndBooking:booking' %}" id="check_avail"
+                                  autocomplete="off">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Arrival date</label>
+                                            <input class="startDate1 form-control datepick" type="text"
+                                                   data-field="date"
+                                                   data-startend="start" data-startendelem=".endDate1" readonly
+                                                   placeholder="Arrival" id="check_in" name="check_in">
+                                            <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Departure date</label>
+                                            <input class="endDate1 form-control datepick" type="text" data-field="date"
+                                                   data-startend="end" data-startendelem=".startDate1" readonly
+                                                   placeholder="Departure" id="check_out" name="check_out">
+                                            <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                                        </div>
+                                    </div>
+                                </div><!-- End row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <div class="form-group">
+                                            <label>Adults</label>
+                                            <div class="qty-buttons">
+                                                <input type="button" value="-" class="qtyminus" name="adults">
+                                                <input type="text" name="adults" id="adults" value=""
+                                                       class="qty form-control"
+                                                       placeholder="0">
+                                                <input type="button" value="+" class="qtyplus" name="adults">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <div class="form-group">
+                                            <label>Children</label>
+                                            <div class="qty-buttons">
+                                                <input type="button" value="-" class="qtyminus" name="children">
+                                                <input type="text" name="children" id="children" value=""
+                                                       class="qty form-control" placeholder="0">
+                                                <input type="button" value="+" class="qtyplus" name="children">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End row -->
+                                <div class="row">
+
+                                    <div class="col-md-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" class="form-control" name="name_booking"
+                                                   id="name_booking"
+                                                   placeholder="Name and Last name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" class="form-control" name="email_booking"
+                                                   id="email_booking"
+                                                   placeholder="Your email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="submit" value="Book now" class="btn_full" id="submit-booking">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn_full" id="submit-booking"
+                                                onclick="document.getElementById('modal-wrapper2').style.display='block'">
+                                            Please login before booking
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn_full" id="submit-booking"
+                                                onclick="document.getElementById('modal-wrapper').style.display='block'">
+                                            Or Sign up right now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {#                            <li><a onclick="document.getElementById('modal-wrapper').style.display='block'">Sign#}
+                            {#                                    up</a></li>#}
+                        {% endif %}
+                        <hr>
+                        <a href="#0" class="btn_outline"> or Contact us</a>
+                        <a href="tel://004542344599" id="phone_2"><i class="icon_set_1_icon-91"></i>+61 405 859 133</a>
+
+                    </div><!-- End box_style -->
+                </div><!-- End theiaStickySidebar -->
+            </div><!-- End col -->
+
+        </div><!-- End row -->
+
+    </div><!-- End container -->
+    <!------------ end detail presentation -------------->
+
+
+    <div id="dtBox"></div><!-- End datepicker -->
+
+{% endblock content %}
+
+
+{% block script %}
+    {% load static %}
+    <!-- Modal Review -->
+    {#################################    添加评论#}
+
+    <div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myReviewLabel" style="font-weight:500;">Write your review</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="message-review">
+                    </div>
+
+
+                    {#review 表单#}
+                    <form method="post" name="review">
+
+                        <input type="hidden" id="property_id" value="{{ property_id }}">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Position</label>
+                                    <select class="form-control" name="position_review" id="position_review">
+                                        <option value="">Please review</option>
+                                        <option value="1">Low</option>
+                                        <option value="2">Sufficient</option>
+                                        <option value="3">Good</option>
+                                        <option value="4">Excellent</option>
+                                        <option value="5">Super</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Comfort</label>
+                                    <select class="form-control" name="comfort_review" id="comfort_review">
+                                        <option value="">Please review</option>
+                                        <option value="1">Low</option>
+                                        <option value="2">Sufficient</option>
+                                        <option value="3">Good</option>
+                                        <option value="4">Excellent</option>
+                                        <option value="5">Super</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- End row -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <select class="form-control" name="price_review" id="price_review">
+                                        <option value="">Please review</option>
+                                        <option value="1">Low</option>
+                                        <option value="2">Sufficient</option>
+                                        <option value="3">Good</option>
+                                        <option value="4">Excellent</option>
+                                        <option value="5">Super</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Quality</label>
+                                    <select class="form-control" name="quality_review" id="quality_review">
+                                        <option value="">Please review</option>
+                                        <option value="1">Low</option>
+                                        <option value="2">Sufficient</option>
+                                        <option value="3">Good</option>
+                                        <option value="4">Excellent</option>
+                                        <option value="5">Super</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- End row -->
+                        <div class="form-group">
+                            <textarea name="review_text" id="review_text" class="form-control" style="height:100px"
+                                      placeholder="Write your review"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="verify_review" class="form-control"
+                                   placeholder="Are you human? 3 + 1 =">
+                        </div>
+
+
+                        {#                        提交按钮#}
+                        <a id="add_review_form" class="btn btn-lg btn-block"
+                           style="color: white; background: #FF3333; width: 200px; margin: auto;">Submit</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Modal Review -->
+
+
+
+    <script>
+
+    $(document).ready(function () {
+
+        $("#add_review_form").click(function () {
+
+            var error = 0;
+
+            var pid = $("#property_id").val();
+
+            var position_review = $("#position_review").val();
+            var comfort_review = $("#comfort_review").val();
+            var price_review = $("#price_review").val();
+            var quality_review= $("#quality_review").val();
+            var review_text = $("#review_text").val();
+            var verify_review = $("#verify_review").val();
+
+
+            if(! position_review ||!comfort_review || !price_review ||!quality_review || !review_text ){
+                alert("please fill out review!");
+                error = 1;
+            }
+
+
+
+            if(verify_review != 4){
+                error=1;
+                alert("wrong verify answer!");
+            }
+
+            if(error ==0){
+                $.ajax({
+                    type:"POST",
+                    url: "{% url 'property:add_review' %}",
+                    data:{
+                        pid:pid,
+                        position_review:position_review,
+                        comfort_review:comfort_review,
+                        price_review:price_review,
+                        quality_review:quality_review,
+                        comment_content:review_text,
+                    },
+                    success: function (data,status) {
+                        if(data==1){
+                            alert("review succeed!");
+                        }else{
+                            alert("something wrong!");
+                        }
+                        location.href ="{% url "property:property_detail" property_id %}"
+
+                    }
+                })
+            }
+
+
+        })
+
+    })
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+    <!-- SPECIFIC SCRIPTS -->
+    <script>
+        $('.carousel_in').owlCarousel({
+            center: true,
+            items: 1,
+            loop: true,
+            autoplay: true,
+            navText: ['', ''],
+            addClassActive: true,
+            margin: -1,
+            responsive: {
+                600: {
+                    items: 1
+                },
+                1000: {
+                    items: 2,
+                    nav: true,
+                }
+            }
+        });
+    </script>
+    <script src="{% static 'acomodation/js/theia-sticky-sidebar.js' %}"></script>
+    <script>
+        jQuery('#sidebar').theiaStickySidebar({
+            additionalMarginTop: 80
+        });
+    </script>
+    <script type="text/javascript" src="{% static 'acomodation/js/DateTimePicker.js' %}"></script>
+    {#<script type="text/javascript" src="{% static 'acomodation/js/DateTimePicker.js' %}"></script>#}
+    <script type="text/javascript">$("#dtBox").DateTimePicker();</script>
+{% endblock script %}

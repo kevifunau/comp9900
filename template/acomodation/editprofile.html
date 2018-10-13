@@ -1,0 +1,41 @@
+{% extends "loginbase.html" %}
+
+{% block title %} index {% endblock %}
+
+
+
+{% block content %}
+
+
+    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+        <div class="panel panel-default">
+
+            <div class="panel-body">
+                <a class="panel-title pull-left" href="{% url 'userandadmin:editprofile' page_id=1 %}" style="font-size:30px;">Edit Profile</a>
+            </div>
+            <div class="panel-body">
+                <a class="panel-title pull-left"  href="{% url 'userandadmin:editprofile' page_id=2 %}"  style="font-size:30px;">Photos</a>
+            </div>
+            <div class="panel-body">
+                <a class="panel-title pull-left" href="{% url "userandadmin:accountsetting" %}" style="font-size:30px;">Settings</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+
+{% block editcontent %}
+{% endblock editcontent %}
+
+
+    </div>
+
+
+
+
+
+
+
+{% endblock content %}

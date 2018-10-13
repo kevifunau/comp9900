@@ -1,0 +1,25 @@
+{% extends "loginbase.html" %}
+{% block title %} index {% endblock %}
+
+{% block content %}
+
+    <h1> add a property successfully </h1>
+    <div class="container">
+        <div class="row centered-form">
+            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"> My property
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{% url 'property:property_detail' new_property.id %}">
+                            <h2> check details </h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

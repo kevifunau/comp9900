@@ -1,0 +1,437 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    <title>index</title>
+    <!-- head of index -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load static %}
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="{% static 'image/apple-touch-icon-57x57-precomposed.png' %}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="image/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+          href="image/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+          href="image/apple-touch-icon-144x144-precomposed.png">
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+    <!-- Searchbar =============================================== -->
+    <div class="parallax-window" id="booking" data-parallax="scroll"
+         data-image-src="{% static 'acomodation/image/Narbar.jpg' %}" data-natural-width="1400"
+         data-natural-height="550">
+        <div id="subheader_home">
+            <div id="sub_content">
+                <div id="book_container">
+                    <form method="post" action="{% url 'property:simple_search' %}" method="post" id="search_property" autocomplete="off">
+
+                        {% csrf_token %}
+
+                        <div id="group_1">
+                            <div id="container_1">
+                                <label>Arrival date</label>
+                                <input class="startDate1 form-control datepick" type="text" data-field="date"
+                                       data-startend="start" data-startendelem=".endDate1" readonly
+                                       placeholder="Arrival" id="check_in" name="check_in">
+                                <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                            </div>
+                            <div id="container_2">
+                                <label>Departure date</label>
+                                <input class="endDate1 form-control datepick" type="text" data-field="date"
+                                       data-startend="end" data-startendelem=".startDate1" readonly
+                                       placeholder="Departure" id="check_out" name="check_out">
+                                <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                            </div>
+                        </div><!-- End group_1 -->
+                        <div id="group_2">
+                            <div id="container_3" style="z-index: 0">
+                                <label for="type" >Type</label>
+                                <div>
+                                    <select id="type" name="type" class="form-control">
+                                        <option value="ALL">Any</option>
+                                        <option value="H">House</option>
+                                        <option value="A">Apartment</option>
+                                        <option value="S">Studio</option>
+                                        <option value="O">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="container_4" style="z-index: 0">
+                                <label>Guests</label>
+                                <div class="qty-buttons">
+                                    <input type="button" value="-" class="qtyminus" name="adults">
+                                    <input type="text" name="adults" id="adults" value="" class="qty form-control"
+                                           placeholder="0">
+                                    <input type="button" value="+" class="qtyplus" name="adults">
+                                </div>
+                            </div>
+                        </div><!-- End group_2 -->
+                        <div id="group_3">
+                            <div id="container_5">
+                                <label>City</label>
+                                <input type="text" class="form-control" name="city" id="name_booking"
+                                       placeholder="e.g. Sydney">
+                            </div>
+                            <div id="container_6">
+                                <label>Price</label>
+                                <input type="text" class="form-control" name="price" id="email_booking"
+                                       placeholder="$500">
+                            </div>
+                        </div><!-- End group_3 -->
+                        <div id="container_7">
+                            <input type="submit" value="Check availability" class="btn_1" id="submit-booking">
+                        </div>
+                    </form>
+                    <div id="message-booking"></div>
+                </div><!-- End book_container -->
+            </div><!-- End sub_content -->
+        </div><!-- End subheader -->
+    </div><!-- End parallax-window -->
+    <!-- End Searchbar ============================================ -->
+
+    <div class="container margin_60_35">
+        <h1 class="main_title"><em></em>Welcome to Driver bnb <span>House and Apartment&amp;Studio</span></h1>
+        <p class="lead styled">
+            Say something!
+        </p>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="mosaic_container">
+                    <img src="{% static 'acomodation/image/mosaic_1.jpg' %}" alt=""
+                         class="img-responsive add_bottom_30"><span class="caption_2">Nice Outdoor</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-xs-12">
+                    <div class="mosaic_container">
+                        <img src="{% static 'acomodation/image/mosaic_2.jpg' %}" alt=""
+                             class="img-responsive add_bottom_30"><span class="caption_2">Large Bedroom</span>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="mosaic_container">
+                        <img src="{% static 'acomodation/image/mosaic_3.jpg' %}" alt=""
+                             class="img-responsive add_bottom_30"><span class="caption_2">Modern Bathroom</span>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="mosaic_container">
+                        <img src="{% static 'acomodation/image/mosaic_4.jpg' %}" alt=""
+                             class="img-responsive add_bottom_30"><span class="caption_2">Wellness</span>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End row -->
+    </div><!-- End container -->
+
+    <div class="container_styled_1">
+        <div class="container margin_60">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <figure class="room_pic"><a href="#"><img src="{% static 'acomodation/image/house_2.jpg' %}"
+                                                              alt="" class="img-responsive"></a><span class="wow zoomIn"
+                                                                                                      data-wow-delay="0.2s"><sup>$</sup>380<small>Per night</small></span>
+                    </figure>
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <div class="room_desc_home">
+                        <h3>House </h3>
+                        <p>
+                            A house will provide you more space and a quiet environment for your family and friends.
+                            Your
+                            will be offerd one or more parking
+                            area and also a yard. You may take your four legs friend with you and perhaps you will get a
+                            chance to enjoy a personal swimming pool.
+                        </p>
+                        <ul>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
+                                    <div class="tooltip-content">
+                                        King size bed
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
+                                    <div class="tooltip-content">
+                                        Bathtub
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
+                                    <div class="tooltip-content">
+                                        Plasma TV
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
+                                    <div class="tooltip-content">
+                                        Parking
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_2_icon-110"></i></span>
+                                    <div class="tooltip-content">
+                                        Swimming Pool
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_1_icon-22"></i></span>
+                                    <div class="tooltip-content">
+                                        Pets
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="room_list.html" class="btn_1_outline">Read more</a>
+                    </div><!-- End room_desc_home -->
+                </div>
+            </div><!-- End row -->
+        </div><!-- End container -->
+    </div><!-- End container_styled_1 -->
+
+    <div class="container margin_60">
+        <div class="row">
+            <div class="col-md-5 col-md-offset-1 col-md-push-5">
+                <figure class="room_pic left"><a href="#"><img src="{% static 'acomodation/image/apartment_1.jpg' %}"
+                                                               alt="" class="img-responsive"></a><span
+                        class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>220<small>Per night</small></span></figure>
+            </div>
+            <div class="col-md-4 col-md-offset-1 col-md-pull-6">
+                <div class="room_desc_home">
+                    <h3>Apartment </h3>
+                    <p>
+                        Our apartments are typically located in complexes of buildings or gated communities, sometimes
+                        with a management office nearby,
+                        and often with a dedicated community convenience shop, amongst other amenities like communal
+                        gardens and parking areas.
+                    </p>
+                    <ul>
+                        <li>
+                            <div class="tooltip_styled tooltip-effect-4">
+                                <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
+                                <div class="tooltip-content">
+                                    King size bed
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tooltip_styled tooltip-effect-4">
+                                <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
+                                <div class="tooltip-content">
+                                    Bathroom
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tooltip_styled tooltip-effect-4">
+                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
+                                <div class="tooltip-content">
+                                    Plasma TV
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tooltip_styled tooltip-effect-4">
+                                <span class="tooltip-item"><i class="icon_set_2_icon-117"></i></span>
+                                <div class="tooltip-content">
+                                    Gym
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tooltip_styled tooltip-effect-4">
+                                <span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
+                                <div class="tooltip-content">
+                                    Parking
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tooltip_styled tooltip-effect-4">
+                                <span class="tooltip-item"><i class="icon_set_1_icon-58"></i></span>
+                                <div class="tooltip-content">
+                                    Restaurant
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="room_list.html" class="btn_1_outline">Read more</a>
+                </div><!-- End room_desc_home -->
+            </div>
+        </div><!-- End row -->
+    </div><!-- End container -->
+
+    <div class="container_styled_1">
+        <div class="container margin_60">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <figure class="room_pic"><a href="#"><img src="{% static 'acomodation/image/studio_1.jpg' %}"
+                                                              alt="" class="img-responsive"></a><span class="wow zoomIn"
+                                                                                                      data-wow-delay="0.2s"><sup>$</sup>150<small>Per night</small></span>
+                    </figure>
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <div class="room_desc_home">
+                        <h3>Studio </h3>
+                        <p>
+                            A studio flat will tend to be smaller and targeted at single young professionals, couples,
+                            and new renters who are in the market for a smaller and more affordable place to live
+                            centrally.
+                            Studio flat rent tends to be cheaper than single apartments as the sleeping area is
+                            integrated with the rest of the space.
+                        </p>
+                        <ul>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
+                                    <div class="tooltip-content">
+                                        King size bed
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
+                                    <div class="tooltip-content">
+                                        Bathroom
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
+                                    <div class="tooltip-content">
+                                        Plasma TV
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_1_icon-12"></i></span>
+                                    <div class="tooltip-content">
+                                        Elevator
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tooltip_styled tooltip-effect-4">
+                                    <span class="tooltip-item"><i class="icon_set_1_icon-86"></i></span>
+                                    <div class="tooltip-content">
+                                        Wifi
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="room_list.html" class="btn_1_outline">Read more</a>
+                    </div><!-- End room_desc_home -->
+                </div>
+            </div><!-- End row -->
+        </div><!-- End container -->
+    </div><!-- End container_styled_1 -->
+
+    <section class="promo_full">
+        <div class="promo_full_wp">
+            <div>
+                <h3>What Clients say<span>It is really a good website to rent a property.</span></h3>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="carousel_testimonials">
+
+                                <div>
+                                    <div class="box_overlay">
+                                        <div class="pic">
+                                            <figure><img src="{% static 'acomodation/image/avatar2.jpg' %}" alt=""
+                                                         class="img-circle"></figure>
+                                            <h4>Shirley
+                                                <small>10 September 2018</small>
+                                            </h4>
+                                        </div>
+                                        <div class="comment">
+                                            "Dear Christophe, Heather and I had a wonderful trip to Paris, and we owe much of that
+                                            to you and the rest of your staff at Guest Apartment Services. We enjoyed our stay at
+                                            the Windows on Seine apartment that you graciously let us change to. We loved how everything
+                                            in the apartment was brand-new and we think that it was in a more quiet area of Ile Saint
+                                            Louis than the Hibiscus apartment that we originally booked."
+                                        </div>
+                                    </div><!-- End box_overlay -->
+                                </div>
+
+                                <div>
+                                    <div class="box_overlay">
+                                        <div class="pic">
+                                            <figure><img src="{% static 'acomodation/image/2.png' %}" alt=""
+                                                         class="img-circle"></figure>
+                                            <h4>Grey
+                                                <small>11 March 2018</small>
+                                            </h4>
+                                        </div>
+                                        <div class="comment">
+                                            "Dear Christophe and the team, It was a pleasure meeting you. And it is certainly
+                                            a pleasure to say how wonderful our stay in the Nympheas apartment was. It turned out
+                                            to be exactly as depicted on the website, with wonderful views over the Seine to the
+                                            lower Marais (an enjoyable part of our stay was exploring the Village St-Paul and rue
+                                            François Miron neighborhoods so close to the apartment). "
+                                        </div>
+                                    </div><!-- End box_overlay -->
+                                </div>
+
+                                <div>
+                                    <div class="box_overlay">
+                                        <div class="pic">
+                                            <figure><img src="{% static 'acomodation/image/testimonial_1.jpg' %}" alt=""
+                                                         class="img-circle"></figure>
+                                            <h4>Keiven
+                                                <small>15 February 2018</small>
+                                            </h4>
+                                        </div>
+                                        <div class="comment">
+                                            "Nice! It’s inevitable that horror stories and problems gain the most attention on here
+                                            and everywhere else. There’s not much to say about good news, is there? Other than - nice!"
+                                        </div>
+                                    </div><!-- End box_overlay -->
+                                </div>
+
+                            </div><!-- End carousel_testimonials -->
+                        </div><!-- End col-md-8 -->
+                    </div><!-- End row -->
+                </div><!-- End container -->
+            </div><!-- End promo_full_wp -->
+        </div><!-- End promo_full -->
+    </section><!-- End section -->
+
+
+{% endblock content %}
+
+{% block script %}
+    <div id="dtBox"></div><!-- End datepicker -->
+    <script type="text/javascript" src="{% static 'acomodation/js/DateTimePicker.js' %}"></script>
+    <script type="text/javascript">$("#dtBox").DateTimePicker();</script>
+{% endblock script %}
+
+
+
+
+

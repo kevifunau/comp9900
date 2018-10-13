@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>page name</title>
+        <!-- SPECIFIC CSS -->
+        {#    ........#}
+{% endblock %}
+
+<!-----以上部分都是   nav bar------>
+
+
+<!-----以下是body部分你要添加的元素------>
+
+{% block content %}
+    <!--加自己选的page对应的subheader，背景图片-->
+    {% load static %}
+    <!-- SubHeader =============================================== -->
+    <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="{% static 'acomodation/img/sub_header_short_2.jpg' %}" data-natural-width="1400"
+        data-natural-height="350">
+        <div id="subheader">
+            <h1>Form</h1>
+        </div><!-- End subheader -->
+    </section><!-- End section -->
+    <!-- End SubHeader ============================================ -->
+
+
+
+    <!---  你的表格等等-->
+     <div class="container margin_60_35">
+        <h2 class="main_title"><em></em>Welcome to Recom <span>Hotel and Bed&amp;Breakfast</span></h2>
+        <div class="row add_top_20">
+
+            <!--左边小表格，没用删了调一下吧--->
+            <div class="col-md-4">
+                <div class="box_style_1">
+                    <div class="box_contact">
+                        <i class="icon_set_1_icon-41"></i>
+                        <h4>Address</h4>
+                        <p>Route de Sablet 1023, Marseille<br>France 01923<br><a href="tel://004542344599">+45 423 445 99</a></p>
+                    </div>
+                    <div class="box_contact">
+                        <i class="icon_set_1_icon-37"></i>
+                        <h4>Get directions</h4>
+                        <form action="http://maps.google.com/maps" method="get" target="_blank">
+                            <div class="form-group">
+                                <input type="text" name="saddr" placeholder="Enter your starting point" class="form-control" />
+                                <input type="hidden" name="daddr" value="New York, NY 11430" /><!-- Write here your end point -->
+                            </div>
+                            <div class="form-group">
+                                <button class="btn_1" type="submit" value="Get directions">Get directions</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--------------------------------->
+
+
+
+            <!----------大表格，自己修改-------->
+
+            <div class="col-md-7 col-md-offset-1">
+
+                <div id="message-contact"></div>
+                <form method="post" action="assets/contact.php" id="contactform">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" id="name_contact" name="name_contact" placeholder="Enter Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" id="lastname_contact" name="lastname_contact" placeholder="Enter Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End row -->
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="email_contact" name="email_contact" class="form-control" placeholder="Enter Email">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" id="phone_contact" name="phone_contact" class="form-control" placeholder="Enter Phone number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea id="message_contact" name="message_contact" class="form-control" placeholder="Write your message" style="height:150px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row add_bottom_30">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Human verification</label>
+                                <input type="text" id="verify_contact" class="form-control add_bottom_30" placeholder="Are you human? 3 + 1 =">
+                            </div>
+                            <input type="submit" value="Submit" class="btn_1" id="submit-contact">
+                        </div>
+                    </div>
+                </form>
+            </div><!-- End col-md-8 -->
+
+            <!-------------大表格 end----------->
+
+
+        </div><!-- End row -->
+    </div><!-- End Container -->
+
+
+<!-----你要添加的部分end------>
+{% endblock %}
+
+
+
+
+<!-----以上部分都是footer------>
+{% block script %}
+    <!-- SPECIFIC CSS -->
+    {#    。。。。。。#}
+    {# 记得改成   src="{% static 'acomodation/......' %}" 我被这个搞死了#}
+{% endblock script %}

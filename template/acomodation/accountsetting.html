@@ -1,0 +1,99 @@
+{% extends "editprofile.html" %}
+
+{% block title %} index {% endblock %}
+
+{% block editcontent %}
+
+
+    <div class="panel panel-info">
+
+        <div class="panel-heading">
+            <h3 class="panel-title ">Change your Password</h3>
+        </div>
+
+
+        <div class="panel-body">
+
+            <div class="row row-condensed space-4">
+                <label class="text-right col-sm-3" for="user_old_password">
+                    old password
+                </label>
+                <div class="col-sm-9">
+                    <input id="user_old_password" size="30" type="text">
+                </div>
+            </div>
+            <br>
+            <div class="row row-condensed space-4">
+                <label class="text-right col-sm-3" for="user_new_password">
+                    New Password
+                </label>
+                <div class="col-sm-9">
+                    <input id="user_new_password" size="30" type="text">
+                </div>
+            </div>
+            <br>
+            <div class="row row-condensed space-4">
+                <label class="text-right col-sm-3" for="user_new_password_confirm">
+                    Confirm Password
+                </label>
+                <div class="col-sm-9">
+                    <input id="user_new_password_confirm" size="30" type="text">
+                </div>
+            </div>
+            <br>
+
+
+        </div>
+
+        <a id="update_form" class="btn btn-lg btn-block"
+           style="color: white; background: #357ebd; width: 200px; margin: auto;">Update password</a>
+
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#update_form").click(function () {
+                var old_password = document.getElementById("user_old_password").value;
+                var new_password = document.getElementById("user_new_password").value;
+                var new_password_confirm = document.getElementById("user_new_password_confirm").value;
+
+                var error = 0;
+
+                if(new_password_confirm != new_password){
+                    error = 1;
+                    alert("passwords do not match!");
+                }
+
+                if (error == 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{% url 'userandadmin:accountsetting' %}",
+                        data: {
+                            old_password: old_password,
+                            new_password: new_password,
+                        },
+                        success: function (data, status) {
+                            if (data == 1) {
+                                alert("update!")
+                            } else if (data == 2) {
+                                alert("wrong password!")
+                            }
+                        }
+
+                    })
+
+
+                }
+
+
+            })
+
+
+        })
+
+
+    </script>
+
+
+{% endblock editcontent %}
