@@ -1,64 +1,297 @@
-{% extends "loginbase.html" %}
+{% extends "base.html" %}
 
-{% block title %} property {% endblock %}
+{% block title %}
+    <title>become a host</title>
+        <!-- SPECIFIC CSS -->
+        {#    ........#}
+{% endblock %}
 
 {% block content %}
 
-    <style>
-        body {
-            background-color: rgba(82, 75, 74, 0.13);
-        }
-        .centered-form {
-            margin-top: auto;
-            overflow: auto;
-            padding: auto;
-        }
+    <!--加自己选的page对应的subheader，背景图片-->
+    {% load static %}
+    <!-- SubHeader =============================================== -->
+    <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="{% static 'acomodation/img/sub_header_short.jpg' %}" data-natural-width="1400"
+        data-natural-height="350">
+        <div id="subheader">
+            <h1>Become a Host</h1>
+        </div><!-- End subheader -->
+    </section><!-- End section -->
+    <!-- End SubHeader ============================================ -->
 
-        .container {
-            overflow: auto;
-            padding: auto;
-        }
 
-        .centered-form .panel {
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
-        }
 
-    </style>
 
-    <div class="container">
-        <div class="row centered-form">
-            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"> Adding your property
-                        </h3>
+    <!---  你的表格等等-->
+     <div class="container margin_60_35">
+        <h2 class="main_title"><em></em>Welcome to Dverbnb <span>Adding your property details here</span></h2>
+
+         <form action="{% url 'property:add_property' %}" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+            <div class="row add_top_20">
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 1:</strong> Start with the basics</h3>
                     </div>
-                    <div class="panel-body">
-                        <form action="{% url 'property:add_property' %}" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ property_form.as_ul}}
-{#                            {{ formset }}#}
-{#                            {% for filed in property_form %}#}
-{#                                {{ filed}}#}
-{#                            {% endfor %}#}
-                            {{ formset.management_form}}
-                            {% for form in formset %}
-                                {{form}}
-                            {% endfor %}
-                            <input type="submit" value="Add My Property" class="btn btn-info btn-block">
-                        </form>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.price.label_tag }}
+                                {{ property_form.price}}
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.types_property.label_tag }}
+                                {{ property_form.types_property}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 2:</strong> Where’s your place located?</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.province.label_tag }}
+                                {{ property_form.province}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.state.label_tag }}
+                                {{ property_form.state}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.city.label_tag }}
+                                {{ property_form.city}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8">
+                            <div class="form-group">
+                                {{ property_form.address.label_tag }}
+                                {{ property_form.address}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="form-group">
+                                {{ property_form.postcode.label_tag }}
+                                {{ property_form.postcode}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 3:</strong> How many guests&rooms&bed can your place accommodate?</h3>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    {{ property_form.capacity.label_tag }}
+                                    {{ property_form.capacity}}
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    {{ property_form.area.label_tag }}
+                                    {{ property_form.area}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    {{ property_form.num_bathrooms.label_tag }}
+                                    {{ property_form.num_bathrooms}}
+                                </div>
+                                </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    {{ property_form.num_bedrooms.label_tag }}
+                                    {{ property_form.num_bedrooms}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    {{ property_form.num_double_bed.label_tag }}
+                                    {{ property_form.num_double_bed}}
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    {{ property_form.num_single_bed.label_tag }}
+                                    {{ property_form.num_single_bed}}
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-8">
+                                <div class="form-group">
+                                    {{ property_form.num_sofa_bed.label_tag }}
+                                    {{ property_form.num_sofa_bed}}
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 4:</strong> What amenities do you offer?</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.kitchen.label_tag }}
+                                {{ property_form.kitchen}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.in_unit_washer.label_tag }}
+                                {{ property_form.in_unit_washer}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.wifi.label_tag }}
+                                {{ property_form.wifi}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.elevator.label_tag }}
+                                {{ property_form.elevator}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.heating.label_tag }}
+                                {{ property_form.heating}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.ac.label_tag }}
+                                {{ property_form.ac}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.tv.label_tag }}
+                                {{ property_form.tv}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.blower.label_tag }}
+                                {{ property_form.blower}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.bathtub.label_tag }}
+                                {{ property_form.bathtub}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.parking.label_tag }}
+                                {{ property_form.parking}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.gyms.label_tag }}
+                                {{ property_form.gyms}}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.swimming_pool.label_tag }}
+                                {{ property_form.swimming_pool}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 5:</strong> Are these allowed in your property?</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.party.label_tag }}
+                                {{ property_form.party}}
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.pet.label_tag }}
+                                {{ property_form.pet}}
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.smoking.label_tag }}
+                                {{ property_form.smoking}}
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                {{ property_form.couple.label_tag }}
+                                {{ property_form.couple}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 6:</strong> Now let’s set the scene about your place.</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-6">
+                            <div class="form-group">
+                                {{ formset.management_form}}
+                                {% for form in formset %}
+                                      {{form}}
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+             <div class="row add_bottom_30">
+                <div class="col-md-6 col-md-offset-2" >
+                    <div class="form-group">
+                        <h4><strong>Click the bottom to check the details of your property.</strong></h4>
+                    </div>
+                    <input type="submit" value="Add My Property" class="btn_1" id="submit-contact">
+                </div>
+            </div>
+         </form>
+    </div><!-- End Container -->
 
 {% endblock content %}
 
 
-
-
-
+{% block script %}
+    <div id="dtBox"></div><!-- End datepicker -->
+    <script type="text/javascript" src="{% static 'acomodation/js/DateTimePicker.js' %}"></script>
+    <script type="text/javascript">$("#dtBox").DateTimePicker();</script>
+{% endblock script %}
 
 

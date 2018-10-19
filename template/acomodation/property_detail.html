@@ -38,17 +38,38 @@
     {% elif property.types_property == "O" %}
         <h1 class="main_title_in">Others</h1>
     {% endif %}
+
     <div class="container add_bottom_60">
 
         <div class="row">
             <div class="col-md-8" id="room_detail_desc">
                 <div id="single_room_feat">
                     <ul>
-                        <li><i class="icon_set_1_icon-7"></i>Wifi</li>
-                        <li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
-                        <li><i class="icon_set_2_icon-104"></i>King size bed</li>
-                        <li><i class="icon_set_2_icon-111"></i>Bathtub</li>
-                        <li><i class="icon_set_2_icon-106"></i>Safe box</li>
+                        <li><i class="icon_set_1_icon-58" ></i>Breakfast</li>
+                        {% if property.wifi %}
+                            <li><i class="icon_set_1_icon-7"></i>Wifi</li>
+                        {% endif %}
+                        {% if property.tv %}
+                            <li><i class="icon_set_2_icon-116"></i>TV</li>
+                        {% endif %}
+                        {% if property.num_double_bed %}
+                            <li><i class="icon_set_2_icon-104"></i>Double size bed</li>
+                        {% endif %}
+                        {% if property.num_single_bed %}
+                            <li><i class="icon_set_2_icon-114"></i>Single Bed</li>
+                        {% endif %}
+                        {% if property.bathtub %}
+                            <li><i class="icon_set_2_icon-111"></i>Bathtub</li>
+                        {% endif %}
+                        {% if property.parking %}
+                            <li><i class="icon_set_1_icon-27"></i>Parking</li>
+                        {% endif %}
+                        {% if property.swimming_pool %}
+                            <li><i class="icon_set_2_icon-110"></i>Swimming Pool</li>
+                        {% endif %}
+                        {% if property.gyms %}
+                            <li><i class="icon_set_2_icon-117"></i>Gym</li>
+                        {% endif %}
                     </ul>
                 </div>
 
@@ -58,64 +79,72 @@
                     </div>
                     <div class="col-md-9">
                         <p>
-                            Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu
-                            detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae
-                            adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique
-                            te
-                            qui. Ad cum movet fierent assueverit, mei stet legere ne. Mel at vide soluta, ut utamur
-                            antiopam
-                            inciderint sed. Ut iriure perpetua voluptaria has, vim postea denique in, mollis pertinax
-                            elaboraret sed in. Per no vidit timeam, quis omittam sed at.
+                            This is a very good house with a beautiful environment, complete facilities, a very good landlord
+                            and a spacious room. If you choose this house, I believe that you and your family and friends will
+                            definitely have a perfect journey.
                         </p>
                         <h4>Room facilities</h4>
                         <p>
-                            Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu
-                            detraxit constituam, an mel iudico constituto efficiendi.
+                            Our rooms have many perfect facilities for your convenience, and all facilities are regularly replaced
+                            and repaired to ensure a comfortable stay.
                         </p>
                         <div class="row">
                             <div class="col-md-4 col-sm-4">
                                 <ul class="list_ok">
-                                    <li>Coffee machine</li>
-                                    <li>Wifi</li>
-                                    <li> Microwave</li>
-                                    <li>Oven</li>
+                                    {% if property.kitchen %}
+                                        <li>kitchen</li>
+                                    {% endif %}
+                                    {% if property.in_unit_washer %}
+                                        <li>In-unit-Washer</li>
+                                    {% endif %}
+                                    {% if property.wifi %}
+                                        <li>WIfI</li>
+                                    {% endif %}
+                                    {% if property.elevator %}
+                                        <li>Elevator</li>
+                                    {% else %}
+                                        <li>Elevator</li>
+                                    {% endif %}
                                 </ul>
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <ul class="list_ok">
-                                    <li>Fridge</li>
-                                    <li>Hairdryer</li>
-                                    <li>Towels</li>
-                                    <li>Toiletries</li>
+                                    {% if property.heating %}
+                                        <li>Heating</li>
+                                    {% endif %}
+                                    {% if property.ac %}
+                                        <li>Air-conditioning</li>
+                                    {% endif %}
+                                    {% if property.tv %}
+                                        <li>TV</li>
+                                    {% endif %}
+                                    {% if property.blower %}
+                                        <li>Hairdryer</li>
+                                    {% endif %}
                                 </ul>
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <ul class="list_ok">
-                                    <li>DVD player</li>
-                                    <li>Air-conditioning</li>
-                                    <li>Tv</li>
-                                    <li>Freezer</li>
+                                    {% if property.bathtub %}
+                                        <li>Bathtub</li>
+                                    {% endif %}
+                                    {% if property.parking %}
+                                        <li>Parking</li>
+                                    {% endif %}
+                                    {% if property.swimming_pool %}
+                                        <li>Swimming Pool</li>
+                                    {% endif %}
+                                    {% if property.gyms %}
+                                        <li>Gym</li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div><!-- End row  -->
                         <h4>Room Prices</h4>
-                        <!-- start pricing table -->
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr>
-                                <td>Low (from 23/03 to 31/05)</td>
-                                <td>140$</td>
-                            </tr>
-                            <tr>
-                                <td>Middle (from 23/03 to 31/05)</td>
-                                <td>180$</td>
-                            </tr>
-                            <tr>
-                                <td>High (from 23/03 to 31/05)</td>
-                                <td>200$</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <h2 class="main_title_in price">
+                            from <strong>${{ property.price }}</strong>/night
+                        </h2>
+
                     </div><!-- End col-md-9  -->
                 </div><!-- End row  -->
 
@@ -125,11 +154,15 @@
                 <div class="row">
 
                     {######################                     写 评论#}
+
                     <div class="col-md-3">
                         <h3>Reviews</h3>
-                        <a href="#" class="btn_1 add_bottom_15" data-toggle="modal" data-target="#myReview">Leave a
-                            review</a>
+                        {% if trip_id != '0' %}
+                            <a href="#" class="btn_1 add_bottom_15" data-toggle="modal" data-target="#myReview">Leave a
+                                review</a>
+                        {% endif %}
                     </div>
+
                     {#########################                评论概况#}
 
                     <div class="col-md-9">
@@ -208,36 +241,28 @@
                     </div>
                     <div class="col-md-9">
                         <ul id="policies">
-                            <li><i class="icon_set_1_icon-83"></i><h5>Check-in and check-out.</h5>
-                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
-                                    omnes
-                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
-                                    assueverit vix, falli aliquam complectitur ex ius.</p>
-                            </li>
-                            <li><i class="icon_set_1_icon-54"></i><h5>Cancellation</h5>
-                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
-                                    omnes
-                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
-                                    assueverit vix, falli aliquam complectitur ex ius.</p>
-                            </li>
-                            <li><i class="icon_set_1_icon-47"></i><h5>Smoking</h5>
-                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
-                                    omnes
-                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
-                                    assueverit vix, falli aliquam complectitur ex ius.</p>
-                            </li>
-                            <li><i class="icon_set_1_icon-35"></i><h5>Payments</h5>
-                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
-                                    omnes
-                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
-                                    assueverit vix, falli aliquam complectitur ex ius.</p>
-                            </li>
-                            <li><i class="icon_set_1_icon-13"></i><h5>Disable</h5>
-                                <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum
-                                    omnes
-                                    molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit
-                                    assueverit vix, falli aliquam complectitur ex ius.</p>
-                            </li>
+                            {% if property.smoking %}
+                                <li><i class="icon_set_1_icon-47"></i><h5>Smoking</h5>
+                                    <p>This house is allowed to smoke and you don't need to worry about smoke alarms. </p>
+                                </li>
+                            {% endif %}
+
+                            {% if property.pet %}
+                                <li><i class="icon_set_1_icon-22"></i><h5>Pets</h5>
+                                    <p>This house is pet-friendly and you and your pet friends can spend a perfect journey together.</p>
+                                </li>
+                            {% endif %}
+                            {% if property.party %}
+                                <li><i class="icon_set_1_icon-99"></i><h5>Play a Party</h5>
+                                    <p>You can have a party with your partner in this house and enjoy your time.</p>
+                                </li>
+                            {% endif %}
+                            {% if property.couple %}
+                                <li><i class="icon_set_1_icon-82"></i><h5>Couple</h5>
+                                    <p>This house allows couples to stay and you can spend a sweet night with your partner.</p>
+                                </li>
+                            {% endif %}
+
                         </ul>
                     </div>
                 </div>
@@ -251,12 +276,11 @@
                     <div class="box_style_1">
                         <div id="message-booking"></div>
                         {% if user.is_authenticated %}
-                            <form method="post" action="{% url 'PendingAndBooking:booking' %}" id="check_avail"
-                                  autocomplete="off">
+                            <form method="post" id="check_avail" autocomplete="off">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
-                                            <label>Arrival date</label>
+                                            <label>Check-in</label>
                                             <input class="startDate1 form-control datepick" type="text"
                                                    data-field="date"
                                                    data-startend="start" data-startendelem=".endDate1" readonly
@@ -266,7 +290,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
-                                            <label>Departure date</label>
+                                            <label>Check-out</label>
                                             <input class="endDate1 form-control datepick" type="text" data-field="date"
                                                    data-startend="end" data-startendelem=".startDate1" readonly
                                                    placeholder="Departure" id="check_out" name="check_out">
@@ -274,36 +298,12 @@
                                         </div>
                                     </div>
                                 </div><!-- End row -->
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label>Adults</label>
-                                            <div class="qty-buttons">
-                                                <input type="button" value="-" class="qtyminus" name="adults">
-                                                <input type="text" name="adults" id="adults" value=""
-                                                       class="qty form-control"
-                                                       placeholder="0">
-                                                <input type="button" value="+" class="qtyplus" name="adults">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <div class="form-group">
-                                            <label>Children</label>
-                                            <div class="qty-buttons">
-                                                <input type="button" value="-" class="qtyminus" name="children">
-                                                <input type="text" name="children" id="children" value=""
-                                                       class="qty form-control" placeholder="0">
-                                                <input type="button" value="+" class="qtyplus" name="children">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- End row -->
+
                                 <div class="row">
 
                                     <div class="col-md-12 col-sm-6">
                                         <div class="form-group">
-                                            <label>Name</label>
+                                            <label>Contact Name</label>
                                             <input type="text" class="form-control" name="name_booking"
                                                    id="name_booking"
                                                    placeholder="Name and Last name">
@@ -311,15 +311,25 @@
                                     </div>
                                     <div class="col-md-12 col-sm-6">
                                         <div class="form-group">
-                                            <label>Email</label>
-                                            <input type="text" class="form-control" name="email_booking"
-                                                   id="email_booking"
-                                                   placeholder="Your email">
+                                            <label>Contact Phone</label>
+                                            <input type="text" class="form-control" name="Phone_booking"
+                                                   id="Phone_booking"
+                                                   placeholder="Contact Phone">
+                                        </div>
+                                        <div class="alert alert-danger" id='bk_phone_invalid' style="display: none;">
+                                            invalid Phone number!
+                                        </div>
+                                        <div class="alert alert-danger" id='bk_property_invalid' style="display: none;">
+                                            This property is unavailable, please check another date or other properties!
                                         </div>
                                     </div>
+                                    <input type="hidden" id="property_id" value="{{ property_id }}" name="property_id">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <input type="submit" value="Book now" class="btn_full" id="submit-booking">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="NEGOTIATION now" class="btn_full" id="submit-pending">
                                         </div>
                                     </div>
                                 </div>
@@ -391,6 +401,7 @@
                     <form method="post" name="review">
 
                         <input type="hidden" id="property_id" value="{{ property_id }}">
+                        <input type="hidden" id="trip_id" value="{{ trip_id }}">
 
                         <div class="row">
                             <div class="col-md-6">
@@ -464,7 +475,7 @@
                         </div>
 
 
-                        {#                        提交按钮#}
+                        {# 提交按钮#}
                         <a id="add_review_form" class="btn btn-lg btn-block"
                            style="color: white; background: #FF3333; width: 200px; margin: auto;">Submit</a>
                     </form>
@@ -474,73 +485,169 @@
     </div><!-- End Modal Review -->
 
 
-
+    <!------------------add review script----------------->
     <script>
+        $(document).ready(function () {
+            $("#add_review_form").click(function () {
+                var error = 0;
 
-    $(document).ready(function () {
+                var pid = $("#property_id").val();
+                var trip_id = $("#trip_id").val();
 
-        $("#add_review_form").click(function () {
+                var position_review = $("#position_review").val();
+                var comfort_review = $("#comfort_review").val();
+                var price_review = $("#price_review").val();
+                var quality_review = $("#quality_review").val();
+                var review_text = $("#review_text").val();
+                var verify_review = $("#verify_review").val();
 
-            var error = 0;
+                if (!position_review || !comfort_review || !price_review || !quality_review || !review_text) {
+                    alert("please fill out review!");
+                    error = 1;
+                }
+                if (verify_review != 4) {
+                    error = 1;
+                    alert("wrong verify answer!");
+                }
+                if (error == 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{% url 'property:add_review' %}",
+                        data: {
+                            pid: pid,
+                            trip_id: trip_id,
+                            position_review: position_review,
+                            comfort_review: comfort_review,
+                            price_review: price_review,
+                            quality_review: quality_review,
+                            comment_content: review_text,
+                        },
+                        success: function (data, status) {
+                            if (data == 1) {
+                                alert("review succeed!");
+                                location.href = "{% url "property:property_detail" property_id 0%}"
+                            } else {
+                                alert("something wrong!");
+                                location.href = "{% url "property:property_detail" property_id trip_id%}"
+                            }
 
-            var pid = $("#property_id").val();
-
-            var position_review = $("#position_review").val();
-            var comfort_review = $("#comfort_review").val();
-            var price_review = $("#price_review").val();
-            var quality_review= $("#quality_review").val();
-            var review_text = $("#review_text").val();
-            var verify_review = $("#verify_review").val();
-
-
-            if(! position_review ||!comfort_review || !price_review ||!quality_review || !review_text ){
-                alert("please fill out review!");
-                error = 1;
-            }
-
-
-
-            if(verify_review != 4){
-                error=1;
-                alert("wrong verify answer!");
-            }
-
-            if(error ==0){
-                $.ajax({
-                    type:"POST",
-                    url: "{% url 'property:add_review' %}",
-                    data:{
-                        pid:pid,
-                        position_review:position_review,
-                        comfort_review:comfort_review,
-                        price_review:price_review,
-                        quality_review:quality_review,
-                        comment_content:review_text,
-                    },
-                    success: function (data,status) {
-                        if(data==1){
-                            alert("review succeed!");
-                        }else{
-                            alert("something wrong!");
                         }
-                        location.href ="{% url "property:property_detail" property_id %}"
-
-                    }
-                })
-            }
-
-
+                    })
+                }
+            })
         })
-
-    })
-
-
-
-
-
     </script>
+    <!------------------end add review script----------------->
+
+     <!------------------booking script----------------->
+    <script>
+        $(document).ready(function () {
+            $("#submit-booking").click(function () {
+                var error = 0;
+
+                var pid = $("#property_id").val();
+
+                var check_in = $("#check_in").val();
+                var check_out = $("#check_out").val();
+                var name_booking = $("#name_booking").val();
+                var Phone_booking = $("#Phone_booking").val();
 
 
+                if (!check_in || !check_out || !name_booking || !Phone_booking) {
+                    alert("please fill out review!");
+                    error = 1;
+                }
+                if (isNaN(Phone_booking)) {
+                    $("#bk_phone_invalid").css('display', 'block');
+                    error = 1;
+                    alert("invalid phone number!");
+                }
+                if (error == 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{% url 'PendingAndBooking:booking' %}",
+                        data: {
+                            pid: pid,
+                            check_in: check_in,
+                            check_out: check_out,
+                            name_booking: name_booking,
+                            Phone_booking: Phone_booking,
+                        },
+                        success: function (data, status) {
+                            if (data == 'failed') {
+                                $("#bk_property_invalid").css('display', 'block');
+                            } else {
+                                alert("booking succeed!");
+                                {#url+=data;#}
+                                console.log(data)
+                                {#var view_data = data.view_data;#}
+                                location.href = `/booking/${data}/paynow/`;
+
+
+                            }
+                        }
+                    })
+                }
+
+                return false;
+            })
+        })
+    </script>
+    <!------------------end booking script----------------->
+
+    <!------------------pending script----------------->
+    <script>
+        $(document).ready(function () {
+            $("#submit-pending").click(function () {
+                var error = 0;
+
+                var pid = $("#property_id").val();
+
+                var check_in = $("#check_in").val();
+                var check_out = $("#check_out").val();
+                var name_booking = $("#name_booking").val();
+                var Phone_booking = $("#Phone_booking").val();
+
+
+                if (!check_in || !check_out || !name_booking || !Phone_booking) {
+                    alert("please fill out review!");
+                    error = 1;
+                }
+                if (isNaN(Phone_booking)) {
+                    $("#bk_phone_invalid").css('display', 'block');
+                    error = 1;
+                    alert("invalid phone number!");
+                }
+                if (error == 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{% url 'PendingAndBooking:pending' %}",
+                        data: {
+                            pid: pid,
+                            check_in: check_in,
+                            check_out: check_out,
+                            name_booking: name_booking,
+                            Phone_booking: Phone_booking,
+                        },
+                        success: function (data, status) {
+                            if (data == 'failed') {
+                                $("#bk_property_invalid").css('display', 'block');
+                            } else {
+                                alert("pending succeed!");
+                                {#url+=data;#}
+                                console.log(data)
+                                {#var view_data = data.view_data;#}
+                                location.href = `/booking/${data}/pending_request/`;
+                            }
+                        }
+                    })
+                }
+
+                return false;
+            })
+        })
+    </script>
+    <!------------------end booking script----------------->
 
 
 

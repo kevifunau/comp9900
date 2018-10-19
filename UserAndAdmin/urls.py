@@ -12,5 +12,4 @@ urlpatterns = [
     url(r'^logout/', views.logout,name="logout"),
     url(r'^editprofile/(?P<page_id>[0-9]+)$', views.editprofile,name="editprofile"),
     url(r'^accountsetting', views.accountsetting,name="accountsetting"),
-
 ]

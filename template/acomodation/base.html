@@ -129,8 +129,14 @@
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
                             {% if user.is_authenticated %}
-                                <li><a href="{% url 'property:add_property' %}">Become a host</a></li>
-                                <li><a href="#">Trips</a></li>
+                                <li><a href="{% url 'property:add_property' %}">
+                                    {% if user.property_set.all  %}
+                                        Add a property
+                                    {% else %}
+                                        Become a host
+                                    {% endif %}
+                                </a></li>
+                                <li><a href="{% url 'PendingAndBooking:trips'%}">Trips</a></li>
                                 <li class="submenu">
                                     <a href="javascript:void(0);" class="show-submenu">{{ user.first_name }}<i
                                             class="icon-down-open-mini"></i></a>
@@ -138,6 +144,9 @@
                                         <li><a href="{% url 'userandadmin:editprofile' page_id=1 %}">Edit Profile</a>
                                         </li>
                                         <li><a href="{% url 'userandadmin:accountsetting' %}">Account Setting</a></li>
+                                        <li><a href="{% url 'property:list_property' %}">My properties</a></li>
+                                        <li><a href="{% url 'PendingAndBooking:my_trans' %}">My trans</a></li>
+
                                         <li><a href="{% url 'userandadmin:logout' %}">Log out</a></li>
                                     </ul>
                                 </li>
@@ -426,16 +435,6 @@
         };
     });
 
-
-
-
-
-
-
-
-
-
-
 </script>
 
 
@@ -443,7 +442,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-12">
-                <img src="{% static 'acomodation/image/2.png' %}" width="141" height="40" alt=""
+                <h3>Author</h3>
+                <img src="{% static 'acomodation/image/2.png' %}" width="141" height="100" alt=""
                      id="logo_footer" data-retina="true">
                 <ul id="contact_details_footer">
                     <li>Belmore Rd 2031, Sydney<br><a href="mailto:Grey1991ss@mail.com">Email: Grey1991ss@gmail.com</a></li>
@@ -466,7 +466,7 @@
                                 }
                             }()
                         </script>
-                    </a></li>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-2 col-sm-4">
@@ -479,26 +479,18 @@
                     <li><a href="#">Gallery</a></li>
                 </ul>
             </div>
-            <div class="col-md-3 col-sm-4">
-                <h3>Change language</h3>
-                <ul>
-                    <li><a href="#">English</a></li>
-                    <li><a href="#">French</a></li>
-                    <li><a href="#">Spanish</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-4" id="newsletter">
-                <h3>Newsletter</h3>
-                <p>Join our newsletter to keep be informed about offers and news.</p>
-                <div id="message-newsletter_2"></div>
-                <form method="post" action="assets/newsletter.php" name="newsletter_2" id="newsletter_2">
-                    <div class="form-group">
-                        <input name="email_newsletter_2" id="email_newsletter_2" type="email" value=""
-                               placeholder="Your mail" class="form-control">
-                    </div>
-                    <input type="submit" value="Subscribe" class="btn_1 white" id="submit-newsletter_2">
-                </form>
-            </div>
+{#            <div class="col-md-3 col-sm-4" id="newsletter">#}
+{#                <h3>Newsletter</h3>#}
+{#                <p>Join our newsletter to keep be informed about offers and news.</p>#}
+{#                <div id="message-newsletter_2"></div>#}
+{#                <form method="post" action="assets/newsletter.php" name="newsletter_2" id="newsletter_2">#}
+{#                    <div class="form-group">#}
+{#                        <input name="email_newsletter_2" id="email_newsletter_2" type="email" value=""#}
+{#                               placeholder="Your mail" class="form-control">#}
+{#                    </div>#}
+{#                    <input type="submit" value="Subscribe" class="btn_1 white" id="submit-newsletter_2">#}
+{#                </form>#}
+{#            </div>#}
         </div><!-- End row -->
         <div class="row">
             <div class="col-md-12">

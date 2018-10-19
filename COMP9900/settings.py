@@ -12,11 +12,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-EMAIL_HOST = 'smtp.exmail.qq.com'
-EMAIL_HOST_USER = '673650968@qq.com'
-EMAIL_HOST_PASSWORD = 'liudan..930401'
-EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_HOST_USER = 'kai.fang@student.unsw.edu.au'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
 
 import os
 

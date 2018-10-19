@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    <title>Trip list</title>
+
+{#    {% load static %}#}
+{#    <!-- Favicons-->#}
+{#    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">#}
+{#    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">#}
+{#    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">#}
+{#    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">#}
+{#    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">#}
+
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- SubHeader =============================================== -->
+    {% load static %}
+
+    <section class="parallax-window" id="short" data-parallax="scroll"
+             data-image-src="{% static 'acomodation/img/sub_header_short.jpg' %}" data-natural-width="1400"
+             data-natural-height="350">
+        <div id="subheader">
+            <h1>My Trips</h1>
+        </div><!-- End subheader -->
+    </section><!-- End section -->
+    <!-- End SubHeader ============================================ -->
+
+    <div class="container margin_60">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-md-offset-1">
+
+                <!--------------------  room list ---------------------->
+                {% for trip in my_trips %}
+                    <div class="row">
+                        <div class="room_desc clearfix" {# onclick="location.href='{% url "property:property_detail" trip.pid %}';" #} >
+                            <div class="col-md-3">
+                                <figure><img src="{{ trip.pid.images_set.first.image.url }}" alt="" class="img-responsive"></figure>
+                            </div>
+                            <div class="col-md-6 room_list_desc">
+                                <p><strong>Arrival time:&nbsp;</strong>{{ trip.start_time }}&nbsp;&nbsp;&nbsp;&nbsp;<strong>Departure time:&nbsp;</strong>{{ trip.end_time }}</p>
+                                <p><strong>Contant name:&nbsp;</strong>{{ trip.contact_name }}</p>
+                                <p><strong>Contant phone:&nbsp;</strong>{{ trip.contact_phone }}</p>
+                                <p><strong>Host Id:&nbsp;</strong>{{ trip.pid.user_ID_id }}&nbsp;&nbsp;&nbsp;&nbsp;<strong>Host Email:&nbsp;</strong>{{ trip.pid.user_ID.email }}</p>
+                            </div>
+                            <div class="col-md-1">
+                                {% if trip.status == "B" %}
+                                    <div class="col-md-2 ">
+                                        <a href="{% url 'PendingAndBooking:paynow' trip.id %}">
+                                            <button type="button" class="btn_1" style="width: 100px" name='paynow' id="pay_now">
+                                                Pay Now
+                                            </button>
+                                        </a>
+                                    </div>
+                                {% elif trip.status == "C" %}
+                                    <div class="col-md-2 ">
+                                        <button type="button" class="btn_1" style="width: 100px" name='wait confirm' id="wait_confirm">
+                                            Confirming
+                                        </button>
+                                    </div>
+                                {% elif trip.status == "P" %}
+                                    <div class="col-md-2 ">
+                                        <button type="button" class="btn_1" style="width: 100px" name='wait pending' id="wait_pending">
+                                            Negotiating
+                                        </button>
+                                    </div>
+                                {% elif trip.status == "PB" %}
+                                    <div class="col-md-2 ">
+                                        <a href="{% url 'PendingAndBooking:pending_paynow' trip.id %}">
+                                            <button type="button" class="btn_1" style="width: 100px" name='pending_success'
+                                                    id="pending_success">
+                                                Negotiated pay
+                                            </button>
+                                        </a>
+                                    </div>
+                                {% elif trip.status == "S" %}
+                                    <div class="col-md-2 ">
+                                        <a href="{% url 'property:property_detail' trip.pid_id trip.id%}">
+                                            <button type="button" class="btn_1" style="width: 100px" name='see detail' id="see_detail">
+                                                See detail
+                                            </button>
+                                        </a>
+                                    </div>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div><!-- End row room -->
+                {% endfor %}
+            </div>
+
+
+        </div><!-- End row -->
+    </div><!-- End container -->
+{% endblock %}
+
+
+
+{% block script %}
+<script src="{% static 'acomodation/js/theia-sticky-sidebar.js' %}"></script>
+<script>
+    jQuery('.sidebar').theiaStickySidebar({
+      additionalMarginTop: 80
+    });
+</script>
+{% endblock script %}
+

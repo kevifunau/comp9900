@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% block title %}
+        <title>Check your property details</title>
+{% endblock %}
+
+
+{% block content %}
+
+
+    <!------------ picture presentation -------------->
+
+    <div class="carousel_in">
+        {% for image in property.images_set.all %}
+            <div><img src="{{ image.image.url }}" alt="" height="450px">
+                <div class="caption"><h3>Detail Picture</h3></div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!------------ end picture presentation -------------->
+
+    <!------------ detail presentation -------------->
+
+    <div class="row col-md-8 col-md-offset-2" >
+        <div class="col-md-6 col-md-offset-1">
+            {% if property.types_property == "H" %}
+                <h1>House</h1>
+            {% elif property.types_property == "A" %}
+                <h1>Apartment</h1>
+            {% elif property.types_property == "S" %}
+                <h1>Studio</h1>
+            {% elif property.types_property == "O" %}
+                <h1>Others</h1>
+            {% endif %}
+        </div>
+        <div class="class= col-md-4 col-md-offset-1">
+            <h3 class="main_title_in price" >
+                from <strong>${{ property.price }}</strong>/night
+            </h3>
+        </div>
+    </div>
+
+    <div class="container add_bottom_60">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" id="room_detail_desc">
+                <div id="single_room_feat">
+                    <ul>
+                        <li><i class="icon_set_1_icon-58" ></i>Breakfast</li>
+                        {% if property.wifi %}
+                            <li><i class="icon_set_1_icon-7"></i>Wifi</li>
+                        {% endif %}
+                        {% if property.tv %}
+                            <li><i class="icon_set_2_icon-116"></i>TV</li>
+                        {% endif %}
+                        {% if property.num_double_bed %}
+                            <li><i class="icon_set_2_icon-104"></i>Double size bed</li>
+                        {% endif %}
+                        {% if property.num_single_bed %}
+                            <li><i class="icon_set_2_icon-114"></i>Single Bed</li>
+                        {% endif %}
+                        {% if property.bathtub %}
+                            <li><i class="icon_set_2_icon-111"></i>Bathtub</li>
+                        {% endif %}
+                        {% if property.parking %}
+                            <li><i class="icon_set_1_icon-27"></i>Parking</li>
+                        {% endif %}
+                        {% if property.swimming_pool %}
+                            <li><i class="icon_set_2_icon-110"></i>Swimming Pool</li>
+                        {% endif %}
+                        {% if property.gyms %}
+                            <li><i class="icon_set_2_icon-117"></i>Gym</li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <h3>Description</h3>
+                    </div>
+                    <p>
+                        This is a very good house with a beautiful environment, complete facilities, a very good landlord
+                        and a spacious room. If you choose this house, I believe that you and your family and friends will
+                        definitely have a perfect journey.
+                    </p>
+                    <div class="col-md-9">
+                        <h4>Room facilities</h4>
+                        <p>
+                            Our rooms have many perfect facilities for your convenience, and all facilities are regularly replaced
+                            and repaired to ensure a comfortable stay.
+                        </p>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <ul class="list_ok">
+                                    {% if property.kitchen %}
+                                        <li>kitchen</li>
+                                    {% endif %}
+                                    {% if property.in_unit_washer %}
+                                        <li>In-unit-Washer</li>
+                                    {% endif %}
+                                    {% if property.wifi %}
+                                        <li>WIfI</li>
+                                    {% endif %}
+                                    {% if property.elevator %}
+                                        <li>Elevator</li>
+                                    {% else %}
+                                        <li>Elevator</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <ul class="list_ok">
+                                    {% if property.heating %}
+                                        <li>Heating</li>
+                                    {% endif %}
+                                    {% if property.ac %}
+                                        <li>Air-conditioning</li>
+                                    {% endif %}
+                                    {% if property.tv %}
+                                        <li>TV</li>
+                                    {% endif %}
+                                    {% if property.blower %}
+                                        <li>Hairdryer</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <ul class="list_ok">
+                                    {% if property.bathtub %}
+                                        <li>Bathtub</li>
+                                    {% endif %}
+                                    {% if property.parking %}
+                                        <li>Parking</li>
+                                    {% endif %}
+                                    {% if property.swimming_pool %}
+                                        <li>Swimming Pool</li>
+                                    {% endif %}
+                                    {% if property.gyms %}
+                                        <li>Gym</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div><!-- End row  -->
+                    </div><!-- End col-md-9  -->
+                </div><!-- End row  -->
+                <hr>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h3>Policies</h3>
+                    </div>
+                    <div class="col-md-9">
+                        <ul id="policies">
+                            {% if property.smoking %}
+                                <li><i class="icon_set_1_icon-47"></i><h5>Smoking</h5>
+                                    <p>This house is allowed to smoke and you don't need to worry about smoke alarms. </p>
+                                </li>
+                            {% endif %}
+
+                            {% if property.pet %}
+                                <li><i class="icon_set_1_icon-22"></i><h5>Pets</h5>
+                                    <p>This house is pet-friendly and you and your pet friends can spend a perfect journey together.</p>
+                                </li>
+                            {% endif %}
+                            {% if property.party %}
+                                <li><i class="icon_set_1_icon-99"></i><h5>Play a Party</h5>
+                                    <p>You can have a party with your partner in this house and enjoy your time.</p>
+                                </li>
+                            {% endif %}
+                            {% if property.couple %}
+                                <li><i class="icon_set_1_icon-82"></i><h5>Couple</h5>
+                                    <p>This house allows couples to stay and you can spend a sweet night with your partner.</p>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+
+
+            </div><!-- End col -->
+
+            <div class="col-md-11 col-md-offset-1">
+                <div class="row add_bottom_30">
+                    <div class="col-md-1">
+                        <a href="{% url 'property:edit_property' property.id %}">
+                            <button type="button" class="btn_1" id="Edit_property">
+                                <span class="icon-cog"></span>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="col-md-1 "  >
+                        <a href="{% url 'property:delete_property' property.id %}" onclick="return confirm('Are you sure to delete this property?')">
+                            <button type="button" class="btn_1" id="Delete_property">
+                                <span class="icon-trash"></span>
+                            </button>
+                        </a>
+                    </div>
+                    {% if property.status %}
+                        <div class="col-md-4 col-md-offset-6 ">
+                            <a href="{% url 'property:cancel_release'  property.id %}">
+                                <button type="button" class="btn_1" name = 'False' id="not_Release_property">
+                                    Cancel Release this property
+                                </button>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="col-md-2 col-md-offset-6">
+                            <a href="{% url 'property:release_property' property.id%}">
+                                <button type="button" class="btn_1" name="Ture" id="Release_property">
+                                    Release now
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col-md-2 ">
+                            <a href="{% url 'property:cancel_release'  property.id %}">
+                                <button type="button" class="btn_1" name = 'False' id="not_Release_property">
+                                    Release later
+                                </button>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div><!-- End row -->
+    </div><!-- End container -->
+    <!------------ end detail presentation -------------->
+
+
+
+{% endblock content %}
+
+
+{% block script %}
+    {% load static %}
+
+
+    <!-- SPECIFIC SCRIPTS -->
+    <script>
+        $('.carousel_in').owlCarousel({
+            center: true,
+            items: 1,
+            loop: true,
+            autoplay: true,
+            navText: ['', ''],
+            addClassActive: true,
+            margin: -1,
+            responsive: {
+                600: {
+                    items: 1
+                },
+                1000: {
+                    items: 2,
+                    nav: true,
+                }
+            }
+        });
+    </script>
+    <script src="{% static 'acomodation/js/theia-sticky-sidebar.js' %}"></script>
+    <script>
+        jQuery('#sidebar').theiaStickySidebar({
+            additionalMarginTop: 80
+        });
+    </script>
+    <script type="text/javascript" src="{% static 'acomodation/js/DateTimePicker.js' %}"></script>
+    <script type="text/javascript" src="{% static 'acomodation/js/DateTimePicker.js' %}"></script>
+    <script type="text/javascript">$("#dtBox").DateTimePicker();</script>
+{% endblock script %}
+

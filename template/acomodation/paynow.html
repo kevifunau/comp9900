@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    <title>Pay now</title>
+
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- SubHeader =============================================== -->
+    {% load static %}
+
+    <section class="parallax-window" id="short" data-parallax="scroll"
+             data-image-src="{% static 'acomodation/img/sub_header_short.jpg' %}" data-natural-width="1400"
+             data-natural-height="350">
+        <div id="subheader">
+            <h1>Pay Now</h1>
+        </div><!-- End subheader -->
+    </section><!-- End section -->
+    <!-- End SubHeader ============================================ -->
+
+    <!-- payment ============================================ -->
+    <div class="container margin_60_35">
+        <h2 class="main_title"><em></em>Total money is $ {{ total_money }}</h2>
+        <div class="row add_top_20">
+
+            <div class="col-md-7 col-md-offset-3">
+
+                <div id="message-contact"></div>
+                <form method="post" action="{% url 'PendingAndBooking:payment' trip_id%}" id="paymentform">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>card number</label>
+                                <input type="text" class="form-control" id="card_number" name="card_number"
+                                       placeholder="Enter card number">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End row -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Security number</label>
+                                <input type="text" id="security_number" name="security_number" class="form-control"
+                                       placeholder="Enter security number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row add_bottom_30">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Human verification</label>
+                                <input type="text" id="verify_contact" class="form-control add_bottom_30"
+                                       placeholder="Are you human? 3 + 1 =">
+                            </div>
+                            <input type="submit" value="Submit" class="btn_1" id="submit-contact">
+                        </div>
+                    </div>
+                </form>
+            </div><!-- End col-md-8 -->
+
+
+        </div><!-- End row -->
+    </div><!-- End Container -->
+
+
+    <!-- end payment ============================================ -->
+
+
+
+{% endblock %}
+
+
+
+{% block script %}
+    <script src="{% static 'acomodation/js/theia-sticky-sidebar.js' %}"></script>
+    <script>
+        jQuery('.sidebar').theiaStickySidebar({
+            additionalMarginTop: 80
+        });
+    </script>
+{% endblock script %}
+

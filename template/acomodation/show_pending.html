@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Show Negotiation Form</title>
+        <!-- SPECIFIC CSS -->
+        {#    ........#}
+{% endblock %}
+
+{% block content %}
+
+    <!--加自己选的page对应的subheader，背景图片-->
+    {% load static %}
+    <!-- SubHeader =============================================== -->
+    <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="{% static 'acomodation/img/sub_header_short.jpg' %}" data-natural-width="1400"
+             data-natural-height="350">
+        <div id="subheader">
+            <h1>Show Negotiation Form</h1>
+        </div><!-- End subheader -->
+    </section><!-- End section -->
+    <!-- End SubHeader ============================================ -->
+
+
+
+
+    <!---  你的表格等等-->
+     <div class="container margin_60_35">
+        <h2 class="main_title"><em></em>This is negotiation form for your property pid: {{ property.id }}<span>Sent by user: {{ trip.user_ID_id }}</span></h2>
+
+         <form action="{% url 'PendingAndBooking:finish_pending' %}" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+            <input type="hidden" name="trip_id" value="{{ trip_id }}">
+            <input type="hidden" name="pending_id" value="{{ pending_id }}">
+            <div class="row add_top_20">
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h4><strong>Part 1:</strong> These are the price and capacity pending</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <h4>Previous Price($): {{ property.price }}</h4>
+                                <h4>Price($): {{ pending_trans.price }}</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <h4>Previous capacity: {{ property.capacity }}</h4>
+                                <h4>Guests: {{ pending_trans.capacity }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h4><strong>Part 2:</strong>These are the negotiation about these four aspects</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                <label >Party</label>
+                                {% if pending_trans.party %}
+                                    <input type="checkbox" id="party" name="party" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="party" name="party" value="True" class="form-control">
+                                {% endif %}
+                                {% if pending_trans.party != property.party %}
+                                    <p>Changed</p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                <label >Pet</label>
+
+                                {% if pending_trans.pet %}
+                                    <input type="checkbox" id="pet" name="pet" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="pet" name="pet" value="True" class="form-control">
+                                {% endif %}
+                                {% if pending_trans.pet != property.pet %}
+                                    <p>Changed</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                <label >Smoking</label>
+
+                                {% if pending_trans.smoking %}
+                                    <input type="checkbox" id="smoking" name="smoking" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="smoking" name="smoking" value="True" class="form-control">
+                                {% endif %}
+                                {% if pending_trans.smoking != property.smoking %}
+                                    <p>Changed</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                <label >Couple</label>
+
+                                {% if pending_trans.couple == True %}
+                                    <input type="checkbox" id="couple" name="couple" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="couple" name="couple" value="True" class="form-control">
+                                {% endif %}
+                                {% if pending_trans.couple != property.couple %}
+                                    <p>Changed</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h4><strong>Part 3:</strong> This is the booking information</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <h4>Check-in: {{ trip.start_time }}</h4>
+                                <h4>Check-out:{{ trip.end_time }}</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <h4>Contact name: {{ trip.contact_name }}</h4>
+                                <h4>Contact phone {{ trip.contact_phone }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="row add_bottom_30">
+                <div class="col-md-1 col-md-offset-2" >
+                    <input type="submit" name="agree" value="Agree" class="btn_1" id="submit-pending_request">
+                </div>
+                 <div class="col-md-1 col-md-offset-2" >
+                    <input type="submit" name="agree" value="Disagree" class="btn_1" id="submit-pending_request">
+                </div>
+            </div>
+         </form>
+    </div><!-- End Container -->
+
+{% endblock content %}
+
+
+{% block script %}
+    <div id="dtBox"></div><!-- End datepicker -->
+    <script type="text/javascript" src="{% static 'acomodation/js/DateTimePicker.js' %}"></script>
+    <script type="text/javascript">$("#dtBox").DateTimePicker();</script>
+{% endblock script %}
+
+

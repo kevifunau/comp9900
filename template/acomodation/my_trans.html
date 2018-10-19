@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    <title>Trip list</title>
+
+{#    {% load static %}#}
+{#    <!-- Favicons-->#}
+{#    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">#}
+{#    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">#}
+{#    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">#}
+{#    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">#}
+{#    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">#}
+
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- SubHeader =============================================== -->
+    {% load static %}
+
+    <section class="parallax-window" id="short" data-parallax="scroll"
+             data-image-src="{% static 'acomodation/img/sub_header_short.jpg' %}" data-natural-width="1400"
+             data-natural-height="350">
+        <div id="subheader">
+            <h1>My Trans</h1>
+        </div><!-- End subheader -->
+    </section><!-- End section -->
+    <!-- End SubHeader ============================================ -->
+
+    <div class="container margin_60">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-md-offset-1">
+
+                <!--------------------  room list ---------------------->
+                {% for tran in my_trans %}
+                    <div class="row">
+                        <div class="room_desc clearfix" {# onclick="location.href='{% url "property:property_detail" trip.pid %}';" #} >
+                            <div class="col-md-4">
+                                <figure><img src="{{ tran.pid.images_set.first.image.url }}" alt="" class="img-responsive"></figure>
+                            </div>
+                            <div class="col-md-6 room_list_desc">
+                                <p><strong>Property Id:&nbsp;</strong>{{ tran.pid_id }}&nbsp;&nbsp;&nbsp;&nbsp;<strong>User Id:&nbsp;</strong>{{ tran.user_ID_id }}</p>
+                                <p><strong>Arrival time:&nbsp;</strong>{{ tran.start_time }}&nbsp;&nbsp;&nbsp;&nbsp;<strong>Departure time:&nbsp;</strong>{{ tran.end_time }}</p>
+                                <p><strong>Contant name:&nbsp;</strong>{{ tran.contact_name }}</p>
+                                <p><strong>Contant phone:&nbsp;</strong>{{ tran.contact_phone }}</p>
+                            </div>
+                            <div class="col-md-1">
+                                {% if tran.status == "C" %}
+                                    <div class="col-md-2 ">
+                                        <a href="{% url 'PendingAndBooking:confirm' tran.id %}">
+                                            <button type="button" class="btn_1" style="width: 100px" name='confirm' id="confirm">
+                                                Confirm
+                                            </button>
+                                        </a>
+                                    </div>
+                                {% elif tran.status == "B" %}
+                                    <div class="col-md-2 ">
+                                        <button type="button" class="btn_1"  style="width: 100px" name='wait payment' id="wait_payment">
+                                            Paying
+                                        </button>
+                                    </div>
+                                {% elif tran.status == "P" %}
+                                    <div class="col-md-2 ">
+                                        <a href="{% url 'PendingAndBooking:show_pending' tran.id %}">
+                                            <button type="button" class="btn_1"  style="width: 100px" name='wait pending' id="wait_pending">
+                                                Negotiating
+                                            </button>
+                                        </a>
+                                    </div>
+                                {% elif tran.status == "PB" %}
+                                    <div class="col-md-2 ">
+                                        <button type="button" class="btn_1" style="width: 100px" name='wait payment'
+                                                id="wait_payment">
+                                            Negotiated paying
+                                        </button>
+                                    </div>
+                                {% elif tran.status == "S" %}
+                                    <div class="col-md-2 ">
+                                        <a href="{% url 'property:look_detail_of_myProperty' tran.pid_id %}">
+                                            <button type="button" class="btn_1" style="width: 100px" name='see detail' id="see_detail">
+                                                See detail
+                                            </button>
+                                        </a>
+                                    </div>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div><!-- End row room -->
+                {% endfor %}
+            </div>
+
+
+        </div><!-- End row -->
+    </div><!-- End container -->
+{% endblock %}
+
+
+
+{% block script %}
+<script src="{% static 'acomodation/js/theia-sticky-sidebar.js' %}"></script>
+<script>
+    jQuery('.sidebar').theiaStickySidebar({
+      additionalMarginTop: 80
+    });
+</script>
+{% endblock script %}
+

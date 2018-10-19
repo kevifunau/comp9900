@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.forms import modelformset_factory
 from django.http import HttpResponse
+from django.shortcuts import render_to_response,get_object_or_404
 
 
 from Property import forms, models
@@ -11,11 +12,12 @@ from .forms import PropertyForm, ImageForm
 from PendingAndBooking.models import TransAndReview
 from UserAndAdmin.models import User
 import time
+import datetime
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 def add_property(request):
-    ImageFormSet = modelformset_factory(Images, form=ImageForm)
+    ImageFormSet = modelformset_factory(Images, form=ImageForm, extra=3)
     if request.method == "POST":
         property_form = forms.PropertyForm(request.POST)
         formset = ImageFormSet(request.POST, request.FILES, queryset=Images.objects.none())
@@ -100,38 +102,98 @@ def add_property(request):
             new_property.couple = couple
             new_property.status = status
 
-            # new_property.longitude = 0.0
-            # new_property.latitude = 0.0
-
             new_property.created_at = time.asctime(time.localtime(time.time()))  #
             new_property.updated_at = time.asctime(time.localtime(time.time()))
             new_property.save()
-
-            # album.album_logo = request.FILES['album_logo']
-            # file_type = album.album_logo.url.split('.')[-1]
-            # file_type = file_type.lower()
-            # if file_type not in IMAGE_FILE_TYPES:
-            #     context = {
-            #         'album': album,
-            #         'form': form,
-            #         'error_message': 'Image file must be PNG, JPG, or JPEG',
-            #     }
-            #     return render(request, 'music/create_album.html', context)
 
             for form in formset.cleaned_data:
                 image = form['image']
                 photo = Images(pid=new_property, image=image)
                 photo.save()
-            return render(request, 'add_successfully.html', {'new_property': new_property,'photos':photo})
+            return render(request, 'detail_of_myProperty.html', {'property': new_property})
     else:
         property_form = forms.PropertyForm()
         formset = ImageFormSet(queryset=Images.objects.none())
         return render(request, 'add_property.html', {'property_form': property_form, 'formset': formset})
-    # if not request.user.is_authenticated():
-    #     return render(request, 'login.html')
-    # else:
+
+def delete_property(request,property_id):
+    property = get_object_or_404(Property, pk=int(property_id))
+    property.delete()
+    properties = Property.objects.filter(user_ID = request.user)
+    return render(request,'list_property.html',{'properties':properties})
+
+def release_property(request,property_id):
+    property = Property.objects.get(pk=int(property_id))
+    property.status = True
+    property.save()
+    properties = Property.objects.filter(user_ID = request.user)
+    return render(request,'list_property.html',{'properties':properties})
+
+def cancel_release(request,property_id):
+    property = Property.objects.get(pk=int(property_id))
+    property.status = False
+    property.save()
+    properties = Property.objects.filter(user_ID = request.user)
+    return render(request,'list_property.html',{'properties':properties})
 
 
+
+def edit_property(request,property_id):
+    if request.method == "POST":
+        property = get_object_or_404(Property, pk=int(property_id))
+        property.types_property = request.POST.get('types_property')
+        property.price = request.POST.get('price')
+
+        property.types_property = request.POST.get('types_property')
+        property.province = request.POST.get('province')
+        property.city = request.POST.get('city')
+        property.state = request.POST.get('state')
+        property.address = request.POST.get('address')
+        property.postcode = request.POST.get('postcode')
+
+        property.capacity = request.POST.get('capacity')
+        property.num_bathrooms = request.POST.get('num_bathrooms')
+        property.num_bedroom = request.POST.get('num_bedroom')
+        property.num_double_bed = request.POST.get('num_double_bed')
+        property.num_single_bed = request.POST.get('num_single_bed')
+        property.num_sofa_bed = request.POST.get('num_sofa_bed')
+        property.area = request.POST.get('area')
+
+        property.kitchen = request.POST.get('kitchen',False)
+        property.in_unit_washer = request.POST.get('in_unit_washer',False)
+        property.elevator = request.POST.get('elevator',False)
+        property.heating = request.POST.get('heating',False)
+        property.ac = request.POST.get('ac',False)
+        property.tv = request.POST.get('tv',False)
+        property.wifi = request.POST.get('wifi',False)
+        property.blower = request.POST.get('blower',False)
+        property.bathtub = request.POST.get('bathtub',False)
+
+        property.parking = request.POST.get('parking',False)
+        property.gyms = request.POST.get('gyms',False)
+        property.swimming_pool = request.POST.get('swimming_pool',False)
+
+        property.party = request.POST.get('party',False)
+        property.pet = request.POST.get('pet',False)
+        property.smoking = request.POST.get('smoking',False)
+        property.couple = request.POST.get('couple',False)
+        property.status = request.POST.get('status',False)
+        
+        property.updated_at = time.asctime(time.localtime(time.time()))
+        property.save()
+
+        return render(request, 'detail_of_myProperty.html', {'property': property})
+    else:
+        property = get_object_or_404(Property, pk=int(property_id))
+        return render(request, 'edit_property.html', {'property_form': property})
+
+def list_property(request):
+    properties = Property.objects.filter(user_ID = request.user)
+    return render(request,'list_property.html',{'properties':properties})
+
+def look_detail_of_myProperty(request,property_id):
+    property = get_object_or_404(Property, pk=int(property_id))
+    return render(request, 'detail_of_myProperty.html', {'property': property})
 
 
 def add_review(request):
@@ -139,24 +201,27 @@ def add_review(request):
         reviewForm = forms.AddReviewForm(request.POST)
         print(reviewForm.errors)
         if reviewForm.is_valid():
-            pid = reviewForm.cleaned_data["pid"]
+            trip_id = reviewForm.cleaned_data["trip_id"]
             position_review = reviewForm.cleaned_data["position_review"]
             comfort_review  = reviewForm.cleaned_data["comfort_review"]
             price_review = reviewForm.cleaned_data["price_review"]
             quality_review = reviewForm.cleaned_data["quality_review"]
             comment_content = reviewForm.cleaned_data["comment_content"]
 
-            # 向 TransAndReview 插入一条review
-            tr = TransAndReview()
 
-            tr.user_ID = request.user
-            tr.pid = Property.objects.get(id= pid)
-            tr.comment_content= comment_content
+            print('trip_id here is {}'.format(trip_id))
 
+
+            #  get trip
+            tr = TransAndReview.objects.get(id=trip_id)
+
+            # add comment
+            tr.comment_content = comment_content
             tr.position_review = position_review
             tr.comfort_review = comfort_review
             tr.price_review = price_review
             tr.quality_review = quality_review
+
 
             tr.ratings = round((position_review + comfort_review + price_review + quality_review)/4)
 
@@ -166,9 +231,9 @@ def add_review(request):
             return HttpResponse(2)
 
 
-def property_detail(request, property_id):
+def property_detail(request, property_id, trip_id):
 
-    tr_list = TransAndReview.objects.filter(pid=property_id)
+    tr_list = TransAndReview.objects.filter(pid=property_id,status='S')
 
     _sum_rating = []
     ############ 评论列表
@@ -177,12 +242,15 @@ def property_detail(request, property_id):
         review_list={}
         review_list['name'] = User.object.filter(email=tr.user_ID)[0].first_name
         review_list['time'] = tr.end_time
+        if tr.comment_content == 'danjieniubi':
+            continue
         review_list['review'] = tr.comment_content
         _sum_rating.append(tr.ratings)
         review_list['ratings_p'] = ["1"]*tr.ratings
         review_list['ratings_n'] = ["1"]*(5 - tr.ratings)
         review_lists.append(review_list)
 
+    review_lists = sorted(review_lists,key=lambda x: x["time"],reverse=True)
     ############# 评论概况
     review_summary = {}
     review_summary["num_review"] = len(_sum_rating)
@@ -193,6 +261,7 @@ def property_detail(request, property_id):
 
     property = Property.objects.get(id=property_id)
     property_id = property_id
-    return render(request, 'property_detail.html', {'property_id':property_id,'property': property,'review_lists': review_lists,'review_summary':review_summary})
+    # print(property_id)
+    return render(request, 'property_detail.html', {'property_id':property_id,'property': property,'review_lists': review_lists,'review_summary':review_summary,'trip_id':trip_id})
 
 

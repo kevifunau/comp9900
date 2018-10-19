@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
 {#    <title>loginbase</title>#}
 
+
 {#    登陆后 使用的 导航栏#}
 {#    采用bootstrap 3 的样式#}
 
@@ -53,7 +54,7 @@
 {#                    其他页面#}
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{% url 'property:add_property' %}">Become a host</a></li>
-                        <li><a href="#">Trips</a></li>
+                        <li><a href="{% url 'PendingAndBooking:my_trans' %}">Trips</a></li>
                     </ul>
                 </div>
 

@@ -16,6 +16,7 @@ class Property(models.Model):
     '''
     address
     '''
+
     province = models.CharField(max_length=20, blank=False, null=False)
     city = models.CharField(max_length=20, blank=False, null=False)
     state = models.CharField(max_length=20, blank=False, null=False)

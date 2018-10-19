@@ -24,173 +24,186 @@
              data-image-src="{% static 'acomodation/img/sub_header_short.jpg' %}" data-natural-width="1400"
              data-natural-height="350">
         <div id="subheader">
-            <h1>Our Wonderfull Rooms</h1>
+            <h1>Our Wonderful Rooms</h1>
         </div><!-- End subheader -->
     </section><!-- End section -->
     <!-- End SubHeader ============================================ -->
 
     <div class="container margin_60">
         <div class="row">
-            <div class="col-lg-9 col-md-8">
+            <div class="col-lg-9 col-md-12 col-md-offset-1">
 
                 <!--------------------  room list ---------------------->
-                {% for property in properties %}
-                    <div class="row">
-                        <div class="room_desc clearfix" onclick="location.href='{% url "property:property_detail" property.id %}';">
-                            <div class="col-md-7">
-                                <figure><img src="{{ property.images_set.first.image.url }}" alt="" class="img-responsive"></figure>
-                            </div>
-                            <div class="col-md-5 room_list_desc">
-                                {% if property.types_property == "H" %}
-                                    <h3>House</h3>
-                                {% elif property.types_property == "A"%}
-                                    <h3>Apartment</h3>
-                                {% elif property.types_property == "S" %}
-                                    <h3>Studio</h3>
-                                {% elif property.types_property == "O" %}
-                                    <h3>Others</h3>
-                                {% endif %}
-                                <p><strong>City:&nbsp;</strong>{{ property.city }}  &nbsp; <strong>State:&nbsp;</strong>{{ property.state }}</p>
-                                <p><strong>Postcode:&nbsp;</strong>{{ property.postcode }}</p>
-                                <p><strong>Address:&nbsp;</strong>{{ property.address }}</p>
-                                <ul>
-                                    {% if property.num_double_bed > 0 %}
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                                                <div class="tooltip-content">King size bed X {{ property.num_double_bed }}</div>
-                                            </div>
-                                        </li>
-                                    {% endif %}
-                                    {% if property.wifi %}
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-86"></i></span>
-                                                <div class="tooltip-content">Free Wifi</div>
-                                            </div>
-                                        </li>
-                                    {% endif %}
-                                    {% if property.num_bathrooms > 0 %}
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
-                                                <div class="tooltip-content">Shower x {{ property.num_bathrooms }}</div>
-                                            </div>
-                                        </li>
-                                    {% endif %}
-                                    {% if property.tv %}
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                                                <div class="tooltip-content">Plasma TV</div>
-                                            </div>
-                                        </li>
-                                    {% endif %}
-                                    {% if property.parking %}
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
-                                                <div class="tooltip-content">Parking Area</div>
-                                            </div>
-                                        </li>
-                                    {% endif %}
-                                    {% if property.pet %}
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-22"></i></span>
-                                                <div class="tooltip-content">Pets</div>
-                                            </div>
-                                        </li>
-                                    {% endif %}
+                {% if empty == 0 %}
+                    <p class="lead styled">
+                        Sorry no property is available please search for another condition
+                    </p>
+                    <div class="row add_bottom_30">
+                        <div class="col-md-6 col-md-offset-2" onclick="location.href='{% url "userandadmin:index" %}';">
+                            <input type="submit" value="Go back to search" class="btn_1" id="submit-contact">
+                        </div>
+                    </div>
 
-                                </ul>
-                                <div class="price">from <strong>${{ property.price }}</strong> /night
-                                    <small>Breakfast included</small>
+                {% else %}
+                    {% for property in properties %}
+                        <div class="row">
+                            <div class="room_desc clearfix"
+                                 onclick="location.href='{% url "property:property_detail" property.id 0 %}';">
+                                <div class="col-md-7">
+                                    <figure><img src="{{ property.images_set.first.image.url }}" alt=""
+                                                 class="img-responsive"></figure>
+                                </div>
+                                <div class="col-md-5 room_list_desc">
+                                    {% if property.types_property == "H" %}
+                                        <h3>House</h3>
+                                    {% elif property.types_property == "A" %}
+                                        <h3>Apartment</h3>
+                                    {% elif property.types_property == "S" %}
+                                        <h3>Studio</h3>
+                                    {% elif property.types_property == "O" %}
+                                        <h3>Others</h3>
+                                    {% endif %}
+                                    <p><strong>City:&nbsp;</strong>{{ property.city }} &nbsp;
+                                        <strong>State:&nbsp;</strong>{{ property.state }}</p>
+                                    <p><strong>Postcode:&nbsp;</strong>{{ property.postcode }}</p>
+                                    <p><strong>Address:&nbsp;</strong>{{ property.address }}</p>
+                                    <ul>
+                                        {% if property.num_double_bed > 0 %}
+                                            <li>
+                                                <div class="tooltip_styled tooltip-effect-4">
+                                                    <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
+                                                    <div class="tooltip-content">King size bed
+                                                        X {{ property.num_double_bed }}</div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+                                        {% if property.wifi %}
+                                            <li>
+                                                <div class="tooltip_styled tooltip-effect-4">
+                                                    <span class="tooltip-item"><i class="icon_set_1_icon-86"></i></span>
+                                                    <div class="tooltip-content">Free Wifi</div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+                                        {% if property.num_bathrooms > 0 %}
+                                            <li>
+                                                <div class="tooltip_styled tooltip-effect-4">
+                                                    <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
+                                                    <div class="tooltip-content">Shower x {{ property.num_bathrooms }}</div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+                                        {% if property.tv %}
+                                            <li>
+                                                <div class="tooltip_styled tooltip-effect-4">
+                                                    <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
+                                                    <div class="tooltip-content">Plasma TV</div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+                                        {% if property.parking %}
+                                            <li>
+                                                <div class="tooltip_styled tooltip-effect-4">
+                                                    <span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
+                                                    <div class="tooltip-content">Parking Area</div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+                                        {% if property.pet %}
+                                            <li>
+                                                <div class="tooltip_styled tooltip-effect-4">
+                                                    <span class="tooltip-item"><i class="icon_set_1_icon-22"></i></span>
+                                                    <div class="tooltip-content">Pets</div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+
+                                    </ul>
+                                    <div class="price">from <strong>${{ property.price }}</strong> /night
+                                        <small>Breakfast included</small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div><!-- End row room -->
-                {% endfor %}
-                <!-------   pagination ----------->
-                <div class="pagination">
-        <span class="step-links">
-            {% if properties.has_previous %}
-                <form action="{% url 'property:simple_search' %}" method="GET">
-                {% csrf_token %}
-                    <input type="hidden" value="1" name="page">
-                    <input type="hidden" value="{{ check_in }}" name="check_in">
-                    <input type="hidden" value="{{ check_out }}" name="check_out">
-                    <input type="hidden" value="{{ type }}" name="type">
-                    <input type="hidden" value="{{ city }}" name="city">
-                    <input type="hidden" value="{{ price }}" name="price">
-                    <button type="submit">&laquo; first</button>
-                </form>
-                <form action="{% url 'property:simple_search' %}" method="GET">
-                {% csrf_token %}
-                    <input type="hidden" value="{{ properties.previous_page_number }}" name="page">
-                    <input type="hidden" value="{{ check_in }}" name="check_in">
-                    <input type="hidden" value="{{ check_out }}" name="check_out">
-                    <input type="hidden" value="{{ type }}" name="type">
-                    <input type="hidden" value="{{ city }}" name="city">
-                    <input type="hidden" value="{{ price }}" name="price">
-                    <button type="submit">previous</button>
-                </form>
-            {% endif %}
+                        </div><!-- End row room -->
+                    {% endfor %}
+                    <!-------   pagination ----------->
+                    <br>
+                    <br>
 
-            <span class="current">
-                Page {{ properties.number }} of {{ properties.paginator.num_pages }}.
-            </span>
+{#                    <div class="pagination">#}
+                        <span class="step-links">
+                            <div class="col-md-11 col-md-offset-1">
+                                <div class="row add_bottom_30">
+                                    {% if properties.has_previous %}
+                                        <div class="col-md-2">
+                                            <form action="{% url 'property:simple_search' %}" method="GET">
+                                            {% csrf_token %}
+                                                <input type="hidden" value="1" name="page">
+                                                <input type="hidden" value="{{ check_in }}" name="check_in">
+                                                <input type="hidden" value="{{ check_out }}" name="check_out">
+                                                <input type="hidden" value="{{ type }}" name="type">
+                                                <input type="hidden" value="{{ city }}" name="city">
+                                                <input type="hidden" value="{{ price }}" name="price">
+                                                <button type="submit" class="btn_1" style="width: 90px;">&laquo; first</button>
 
-            {% if properties.has_next %}
-                <form action="{% url 'property:simple_search' %}" method="GET">
-                {% csrf_token %}
-                    <input type="hidden" value="{{ properties.next_page_number }}" name="page">
-                    <input type="hidden" value="{{ check_in }}" name="check_in">
-                    <input type="hidden" value="{{ check_out }}" name="check_out">
-                    <input type="hidden" value="{{ type }}" name="type">
-                    <input type="hidden" value="{{ city }}" name="city">
-                    <input type="hidden" value="{{ price }}" name="price">
-                    <button type="submit">next</button>
-                </form>
-                <form action="{% url 'property:simple_search' %}" method="GET">
-                {% csrf_token %}
-                    <input type="hidden" value="{{ properties.paginator.num_pages }}" name="page">
-                    <input type="hidden" value="{{ check_in }}" name="check_in">
-                    <input type="hidden" value="{{ check_out }}" name="check_out">
-                    <input type="hidden" value="{{ type }}" name="type">
-                    <input type="hidden" value="{{ city }}" name="city">
-                    <input type="hidden" value="{{ price }}" name="price">
-                    <button type="submit">last &raquo;</button>
-                </form>
-            {% endif %}
-        </span>
-                </div>
-                <!-------- end pagination ------------>
+    {#                                            <button type="submit">&laquo; first</button>#}
+                                            </form>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <form action="{% url 'property:simple_search' %}" method="GET">
+                                            {% csrf_token %}
+                                                <input type="hidden" value="{{ properties.previous_page_number }}"
+                                                       name="page">
+                                                <input type="hidden" value="{{ check_in }}" name="check_in">
+                                                <input type="hidden" value="{{ check_out }}" name="check_out">
+                                                <input type="hidden" value="{{ type }}" name="type">
+                                                <input type="hidden" value="{{ city }}" name="city">
+                                                <input type="hidden" value="{{ price }}" name="price">
+                                                <button type="submit" class="btn_1" style="width: 90px;">previous</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                    <div class="col-md-2">
+                                        Page {{ properties.number }} of {{ properties.paginator.num_pages }}.
+                                    </div>
+{#                                    <span class="current">Page {{ properties.number }} of {{ properties.paginator.num_pages }}.</span>#}
+
+                                    {% if properties.has_next %}
+                                        <div class="col-md-2">
+                                            <form action="{% url 'property:simple_search' %}" method="GET">
+                                                {% csrf_token %}
+                                                <input type="hidden" value="{{ properties.next_page_number }}" name="page">
+                                                <input type="hidden" value="{{ check_in }}" name="check_in">
+                                                <input type="hidden" value="{{ check_out }}" name="check_out">
+                                                <input type="hidden" value="{{ type }}" name="type">
+                                                <input type="hidden" value="{{ city }}" name="city">
+                                                <input type="hidden" value="{{ price }}" name="price">
+                                                <button type="submit" class="btn_1" style="width: 90px;">next</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <form action="{% url 'property:simple_search' %}" method="GET">
+                                                {% csrf_token %}
+                                                <input type="hidden" value="{{ properties.paginator.num_pages }}"
+                                                       name="page">
+                                                <input type="hidden" value="{{ check_in }}" name="check_in">
+                                                <input type="hidden" value="{{ check_out }}" name="check_out">
+                                                <input type="hidden" value="{{ type }}" name="type">
+                                                <input type="hidden" value="{{ city }}" name="city">
+                                                <input type="hidden" value="{{ price }}" name="price">
+                                                <button type="submit" class="btn_1" style="width: 90px;">last &raquo;</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </span>
+{#                    </div>#}
+
+                    <!-------- end pagination ------------>
+                {% endif %}
+
             </div>
-
-
-{#            <div class="col-lg-3 col-md-4 sidebar">#}
-{##}
-{#                <div class="theiaStickySidebar">#}
-{#                    <div class="box_style_3" id="general_facilities">#}
-{#                        <h3>General facilities</h3>#}
-{#                        <ul>#}
-{#                            <li><i class="icon_set_1_icon-86"></i>Free Wifi</li>#}
-{#                            <li><i class="icon_set_2_icon-103"></i>Loundry service</li>#}
-{#                            <li><i class="icon_set_2_icon-110"></i>Swimming pool</li>#}
-{#                            <li><i class="icon_set_1_icon-58"></i>Restaurant</li>#}
-{#                            <li><i class="icon_set_1_icon-27"></i>Parking</li>#}
-{#                        </ul>#}
-{#                    </div>#}
-{#                    <div class="box_style_2">#}
-{#                        <i class="icon_set_1_icon-90"></i>#}
-{#                        <h4>Need help? Call us</h4>#}
-{#                        <a href="tel://004542344599" class="phone">+45 423 445 99</a>#}
-{#                        <small>Monday to Friday 9.00am - 7.30pm</small>#}
-{#                    </div>#}
-{##}
-{#                </div>#}
-{#            </div>#}
 
         </div><!-- End row -->
     </div><!-- End container -->
@@ -199,7 +212,7 @@
 
 
 {% block script %}
-<script src="js/theia-sticky-sidebar.js"></script>
+<script src="{% static 'acomodation/js/theia-sticky-sidebar.js' %}"></script>
 <script>
     jQuery('.sidebar').theiaStickySidebar({
       additionalMarginTop: 80

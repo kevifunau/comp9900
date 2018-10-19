@@ -44,8 +44,9 @@ def simple_search(request):
         price = int(price)
     if not city:
         city = ''
-    if type == 'ALL':
+    if type == 'ALL' or not type:
         type = ''
+
 
 
     print('check_in: {},check_out: {},type: {},capacity: {},city: {},price: {}'.format(check_in,check_out,type,capacity,city,price),sep='\n')
@@ -92,8 +93,8 @@ def simple_search(request):
     except EmptyPage:
         properties = paginator.page(paginator.num_pages)
 
-
-
+    empty = len(property_list)
+    print("empty is:",empty)
     context = {
         'properties': properties,
         'city': city,
@@ -102,113 +103,9 @@ def simple_search(request):
         'capacity': capacity,
         'price': price,
         'type': type,
+        'empty': empty,
     }
     return render(request, template, context)
 
-
-def multi_search(request):
-    template = 'multi_search_list.html'
-
-    search_form = forms.SearchForm(request.POST)
-    # if search_form.is_valid():
-    price = search_form.cleaned_data['price']
-    types_property = search_form.cleaned_data['types_property']
-
-    province = search_form.cleaned_data['province']
-    city = search_form.cleaned_data['city']
-    state = search_form.cleaned_data['state']
-    address = search_form.cleaned_data['address']
-    postcode = search_form.cleaned_data['postcode']
-
-    capacity = search_form.cleaned_data['capacity']
-    num_bathrooms = search_form.cleaned_data['num_bathrooms']
-    num_bedrooms = search_form.cleaned_data['num_bedrooms']
-    num_double_bed = search_form.cleaned_data['num_double_bed']
-    # num_single_bed = search_form.cleaned_data['num_single_bed']
-    # num_sofa_bed = search_form.cleaned_data['num_sofa_bed']
-    # area = search_form.cleaned_data['area']
-
-    # kitchen = search_form.cleaned_data['kitchen']
-    # in_unit_washer = search_form.cleaned_data['in_unit_washer']
-    # elevator = search_form.cleaned_data['elevator']
-    # heating = search_form.cleaned_data['heating']
-    # ac = search_form.cleaned_data['ac']
-    # tv = search_form.cleaned_data['tv']
-    wifi = search_form.cleaned_data['wifi']
-    # blower = search_form.cleaned_data['blower']
-    # bathtub = search_form.cleaned_data['bathtub']
-    #
-    # parking = search_form.cleaned_data['parking']
-    # gyms = search_form.cleaned_data['gyms']
-    # swimming_pool = search_form.cleaned_data['swimming_pool']
-    #
-    # party = search_form.cleaned_data['party']
-    # pet = search_form.cleaned_data['pet']
-    # smoking = search_form.cleaned_data['smoking']
-    # couple = search_form.cleaned_data['couple']
-    status = search_form.cleaned_data['status']
-
-    property_list = models.Property.objects.filter(Q(province__iexact=province) &
-                                                   Q(city__iexact=city) &
-                                                   Q(price__exact=price) &
-                                                   Q(types_property__iexact=types_property) &
-                                                   Q(state__iexact=state) &
-                                                   Q(address__iexact=address) &
-                                                   Q(postcode__exact=postcode) &
-                                                   Q(capacity__gte=capacity) &
-                                                   Q(num_bathrooms__gte=num_bathrooms) &
-                                                   Q(num_bedrooms__gte=num_bedrooms)&
-                                                   Q(num_double_bed__gte=num_double_bed)&
-                                                   # Q(num_single_bed__gte=num_single_bed)&
-                                                   # Q(num_sofa_bed__gte=num_sofa_bed)&
-                                                   # Q(area__exact=area)&
-                                                   # Q(kitchen__exact=kitchen)&
-                                                   # Q(in_unit_washer__exact=in_unit_washer)&
-                                                   # Q(elevator__exact=elevator)&
-                                                   # Q(heating__exact=heating)&
-                                                   # Q(ac__exact=ac)&
-                                                   # Q(tv__exact=tv)&
-                                                   Q(wifi__exact=wifi)&
-                                                   # Q(blower__exact=blower)&
-                                                   # Q(bathtub__exact=bathtub)&
-                                                   # Q(parking__exact=parking)&
-                                                   # Q(gyms__exact=gyms)&
-                                                   # Q(swimming_pool__exact=swimming_pool)&
-                                                   # Q(party__exact=party)&
-                                                   # Q(pet__exact=pet)&
-                                                   # Q(smoking__exact=smoking)&
-                                                   # Q(couple__exact=couple)&
-                                                   Q(status__exact=status)
-                                                   ).distinct()
-
-    paginator = Paginator(property_list, 10)
-    page = request.GET.get('page')
-
-    try:
-        properties = paginator.page(page)
-    except PageNotAnInteger:
-        properties = paginator.page(1)
-    except EmptyPage:
-        properties = paginator.page(paginator.num_pages)
-
-    # index = properties.number - 1
-    # max_index = len(paginator.page_range)
-    # start_index = index - 5 if index >= 5 else 0
-    # end_index = index + 5 if index <= max_index else max_index
-    # page_range = paginator.page_range[start_index:end_index]
-
-    search_form = forms.SearchForm()
-
-    context = {
-        'properties': properties,
-        'search_form': search_form
-        # 'page_range': page_range
-    }
-    print("valid")
-
-    return render(request, template, context)
-    # else:
-    #     print("unvalied")
-    #     return render(request, template, {'search_form': search_form})
 
 

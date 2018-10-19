@@ -1,0 +1,379 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title> Edit My Property </title>
+        <!-- SPECIFIC CSS -->
+        {#    ........#}
+{% endblock %}
+
+{% block content %}
+
+    <!--加自己选的page对应的subheader，背景图片-->
+    {% load static %}
+    <!-- SubHeader =============================================== -->
+    <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="{% static 'acomodation/img/sub_header_short.jpg' %}" data-natural-width="1400"
+        data-natural-height="350">
+        <div id="subheader">
+            <h1>Edit My Property</h1>
+        </div><!-- End subheader -->
+    </section><!-- End section -->
+    <!-- End SubHeader ============================================ -->
+
+
+    <!---  你的表格等等-->
+     <div class="container margin_60_35">
+        <h2 class="main_title"><em></em>Welcome to Dverbnb <span>Editing your property details here</span></h2>
+
+         <form action="{% url 'property:edit_property'  property_form.id %}" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+            <div class="row add_top_20">
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 1:</strong> Start with the basics:</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label >Price($)</label>
+                                <input type="text" id="price" name="price" value="{{ property_form.price}}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label >Type of your property</label>
+                                <select name="types_property" class="form-control">
+                                    {% if property_form.types_property == "H" %}
+                                    <option value="H" selected="selected">House</option>
+                                    <option value="A">Apartment</option>
+                                    <option value="S">Studio</option>
+                                    <option value="O">Other</option>                                                            {% elif property_form.types_property == "A" %}
+                                    <option value="H">House</option>
+                                    <option value="A" selected="selected">Apartment</option>
+                                    <option value="S">Studio</option>
+                                    <option value="O">Other</option>                                                            {% elif property_form.types_property == "S" %}
+                                    <option value="H">House</option>
+                                    <option value="A">Apartment</option>
+                                    <option value="S" selected="selected">Studio</option>
+                                    <option value="O">Other</option>                                                            {% elif property_form.types_property == "O" %}
+                                    <option value="H">House</option>
+                                    <option value="A">Apartment</option>
+                                    <option value="S">Studio</option>
+                                    <option value="O" selected="selected">Other</option>                                        {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 2:</strong> Where’s your place located?</h3>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label >Country / Region</label>
+                                    <input type="text" id="province" name="province" value="{{ property_form.province}}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label >State</label>
+                                    <input type="text" id="state" name="state" value="{{ property_form.state}}" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label >City</label>
+                                    <input type="text" id="city" name="city" value="{{ property_form.city}}" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8">
+                                <div class="form-group">
+                                    <label >Address</label>
+                                    <input type="text" id="address" name="address" value="{{ property_form.address}}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group">
+                                    <label >Postcode</label>
+                                    <input type="text" id="postcode" name="postcode" value="{{ property_form.postcode}}" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 3:</strong> How many guests&rooms&bed can your place accommodate?</h3>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label >Capacity</label>
+                                    <input type="text" id="capacity" name="capacity" value="{{ property_form.capacity}}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label >Area</label>
+                                    <input type="text" id="area" name="area" value="{{ property_form.area}}" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label >Number of Bathroom</label>
+                                    <input type="number" id="num_bathrooms" name="num_bathrooms" value="{{ property_form.num_bathrooms}}" class="form-control">
+                                </div>
+                                </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label >Number of Bed room</label>
+                                    <input type="number" id="num_bedrooms" name="num_bedrooms" value="{{ property_form.num_bedrooms}}" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label >Number of Double Bed</label>
+                                    <input type="number" id="num_double_bed" name="num_double_bed" value="{{ property_form.num_double_bed}}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label >Number of Single Bed</label>
+                                    <input type="number" id="num_single_bed" name="num_single_bed" value="{{ property_form.num_single_bed}}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-8">
+                                <div class="form-group">
+                                    <label >Number of Sofa Bed</label>
+                                    <input type="number" id="num_sofa_bed" name="num_sofa_bed" value="{{ property_form.num_sofa_bed}}" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 4:</strong> What amenities do you offer?</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >kitchen</label>
+                                {% if property_form.kitchen %}
+                                    <label for="kitchen"></label>
+                                    <input type="checkbox" id="kitchen" name="kitchen" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="kitchen" name="kitchen" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >In Unit Washer</label>
+                                {% if property_form.in_unit_washer %}
+                                    <input type="checkbox" id="in_unit_washer" name="in_unit_washer" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                <input type="checkbox" id="in_unit_washer" name="in_unit_washer" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >WIFI</label>
+                                {% if property_form.wifi %}
+                                    <input type="checkbox" id="wifi" name="wifi" checked="checked" value="True" class="form-control" class="">
+                                {% else %}
+                                    <input type="checkbox" id="wifi" name="wifi" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >Elevator</label>
+                                {% if property_form.elevator %}
+                                    <input type="checkbox" id="elevator" name="elevator" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="elevator" name="elevator" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >Heating</label>
+                                {% if property_form.heating %}
+                                    <input type="checkbox" id="heating" name="heating" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="heating" name="heating" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >Air Conditioner</label>
+                                 {% if property_form.ac %}
+                                    <input type="checkbox" id="ac" name="ac" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="ac" name="ac" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >TV</label>
+                                {% if property_form.tv %}
+                                    <input type="checkbox" id="tv" name="tv" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="tv" name="tv" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >Blower</label>
+                                {% if property_form.blower %}
+                                    <input type="checkbox" id="blower" name="blower" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="blower" name="blower" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >Bathtub</label>
+                                {% if property_form.bathtub %}
+                                    <input type="checkbox" id="bathtub" name="bathtub" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="bathtub" name="bathtub" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >Parking</label>
+                                {% if property_form.parking %}
+                                    <input type="checkbox" id="parking" name="parking" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="parking" name="parking" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >Gyms</label>
+                                {% if property_form.gyms %}
+                                    <input type="checkbox" id="gyms" name="gyms" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="gyms" name="gyms" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label >Swimming Pool</label>
+                                {% if property_form.swimming_pool %}
+                                    <input type="checkbox" id="swimming_pool" name="swimming_pool" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="swimming_pool" name="swimming_pool" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="message-contact">
+                        <h3><strong>Step 5:</strong> Is allowded these in your property?</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                <label >Party</label>
+                                {% if property_form.party %}
+                                    <input type="checkbox" id="party" name="party" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="party" name="party" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                <label >Pet</label>
+                                {% if property_form.pet %}
+                                    <input type="checkbox" id="pet" name="pet" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="pet" name="pet" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                <label >Smoking</label>
+                                {% if property_form.smoking %}
+                                    <input type="checkbox" id="smoking" name="smoking" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="smoking" name="smoking" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group">
+                                <label >Couple</label>
+                                {% if property_form.couple == True %}
+                                    <input type="checkbox" id="couple" name="couple" checked="checked" value="True" class="form-control">
+                                {% else %}
+                                    <input type="checkbox" id="couple" name="couple" value="True" class="form-control">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{#                <div class="col-md-8 col-md-offset-2">#}
+{#                    <div id="message-contact">#}
+{#                        <h3>Step 6: Now let’s set the scene about your place.</h3>#}
+{#                    </div>#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-12 col-sm-6">#}
+{#                            <div class="form-group">#}
+{#                                {{ formset.management_form}}#}
+{#                                {% for form in formset %}#}
+{#                                      {{form}}#}
+{#                                {% endfor %}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+             <div class="row add_bottom_30">
+                <div class="col-md-10 col-md-offset-2" >
+                    <div class="form-group col-md-offset-2">
+                        <h4><strong>Click the bottom to update the details of your property.</strong></h4>
+                    </div>
+                    <input type="submit" value="Update" class="btn_1 col-md-offset-4" id="submit-contact">
+                </div>
+            </div>
+         </form>
+    </div><!-- End Container -->
+
+{% endblock content %}
+
+
+{% block script %}
+    <div id="dtBox"></div><!-- End datepicker -->
+    <script type="text/javascript" src="{% static 'acomodation/js/DateTimePicker.js' %}"></script>
+    <script type="text/javascript">$("#dtBox").DateTimePicker();</script>
+{% endblock script %}
+
+

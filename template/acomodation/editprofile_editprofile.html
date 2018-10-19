@@ -4,8 +4,32 @@
 
 {% block editcontent %}
 
+    <script>
 
 
+        function showload() {
+
+            var year = "{{ year }}";
+            var day = "{{ day }}";
+            var month = "{{ month }}";
+
+
+            SelectElement("profile_date_year", year);
+            SelectElement("profile_date_month", month);
+            SelectElement("profile_date_day", day);
+
+
+            function SelectElement(id, valueToSelect) {
+                var element = document.getElementById(id);
+                element.value = valueToSelect;
+            }
+
+        }
+
+        window.onload = showload;
+
+
+    </script>
 
 
     <div class="panel panel-info">
@@ -21,7 +45,8 @@
                     First Name
                 </label>
                 <div class="col-sm-9">
-                    <input id="user_first_name" name="user[first_name]" size="30" type="text" value="{{ user.first_name }}">
+                    <input id="user_first_name" name="user[first_name]" size="30" type="text"
+                           value="{{ user.first_name }}">
                 </div>
             </div>
             <br>
@@ -31,7 +56,8 @@
                     Last Name
                 </label>
                 <div class="col-sm-9">
-                    <input id="user_last_name" name="user[last_name]" size="30" type="text" value="{{ user.last_name }}">
+                    <input id="user_last_name" name="user[last_name]" size="30" type="text"
+                           value="{{ user.last_name }}">
                 </div>
             </div>
             <br>
@@ -61,7 +87,7 @@
                 <div class="col-sm-9">
                     <div class="form-inline" id="birth-date">
                         <select id="profile_date_year" name="profile[date][year]" class="form-control">
-                            <option value="" selected="selected">Year</option>
+                            <option value="1888">Year</option>
                             <option value="2003">2003</option>
                             <option value="2002">2002</option>
                             <option value="2001">2001</option>
@@ -177,31 +203,31 @@
                             <option value="1891">1891</option>
                         </select>
                         <select id="profile_date_month" name="profile[date][month]" class="form-control">
-                            <option value="" selected="selected">Month</option>
-                            <option value="1">January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                            <option value="4">April</option>
-                            <option value="5">May</option>
-                            <option value="6">June</option>
-                            <option value="7">July</option>
-                            <option value="8">August</option>
-                            <option value="9">September</option>
+                            <option value="" >Month</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
                             <option value="10">October</option>
                             <option value="11">November</option>
                             <option value="12">December</option>
                         </select>
                         <select id="profile_date_day" name="profile[date][day]" class="form-control">
-                            <option value="" selected="selected">Day</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
+                            <option value="" >Day</option>
+                            <option value="01">1</option>
+                            <option value="02">2</option>
+                            <option value="03">3</option>
+                            <option value="04">4</option>
+                            <option value="05">5</option>
+                            <option value="06">6</option>
+                            <option value="07">7</option>
+                            <option value="08">8</option>
+                            <option value="09">9</option>
                             <option value="10">10</option>
                             <option value="11">11</option>
                             <option value="12">12</option>
@@ -321,7 +347,6 @@
 
 
     <script>
-
         $(document).ready(function () {
             $("#save_form").click(function () {
                 var first_name = document.getElementById("user_first_name").value;
@@ -334,33 +359,33 @@
                 var location = document.getElementById('user_profile_info_current_city').value;
                 var user_description = document.getElementById("user_profile_info_about").value;
 
+                if(birth_day =="" || birth_month == "" || birth_year == 1888){
+                    alert("please set your date of birth.");
+                }
+
+
+
+
                 $.ajax({
                     type: "POST",
                     url: "{% url 'userandadmin:editprofile' page_id=1 %}",
                     data: {
                         first_name: first_name,
                         last_name: last_name,
-                        gender : gender,
-                        date_of_birth :birth_year +","+  birth_month + ","+ birth_day,
-                        language : language,
-                        location :location,
-                        user_description:user_description,
+                        gender: gender,
+                        date_of_birth: birth_year + "," + birth_month + "," + birth_day,
+                        language: language,
+                        location: location,
+                        user_description: user_description,
                     },
                     success: function (data, status) {
                         if (data == 1) {
                             alert("saved!");
                         }
                     }
-
                 })
-
-
             });
-
-
         })
-
-
     </script>
 
 
